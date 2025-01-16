@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
@@ -34,8 +35,8 @@ public class Cliente {
     @Column(unique = true, nullable = false, length = 11)
     private String cpf;
 
-    @Column( name = "data_nascimento", unique = true)
-    private Date dataNascimento;
+    @Column(name = "data_nascimento")
+    private LocalDate dataNascimento;
 
     @Column(length = 255)
     private String endereco;
@@ -49,7 +50,7 @@ public class Cliente {
     @Column(length = 8)
     private String cep;
 
-    @Column(length = 2)
+    @Column(name = "data_cadastro", updatable = false)
     private LocalDateTime dataCadastro;
 
     @Column(length = 2)
@@ -65,7 +66,7 @@ public class Cliente {
         this.cidade = dto.cidade();
         this.estado = dto.estado();
         this.cep = dto.cep();
-        this.dataCadastro = LocalDateTime.now();  // A data de cadastro será o momento atual
+        this.dataCadastro = dto.dataCadastro();
         this.ativo = dto.ativo();
     }
 

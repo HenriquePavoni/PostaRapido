@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public record ClienteDTO(
         @NotEmpty
@@ -22,7 +21,7 @@ public record ClienteDTO(
         String cpf,
 
         @JsonFormat(pattern = "dd/MM/yyyy")
-        Date dataNascimento,
+        LocalDate dataNascimento,
 
         String endereco,
 
