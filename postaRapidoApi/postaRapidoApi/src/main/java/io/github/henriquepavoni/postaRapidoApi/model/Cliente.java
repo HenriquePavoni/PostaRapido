@@ -7,9 +7,9 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
-@Table(name = "cliente")
+
+@Table(name = "cliente", uniqueConstraints = @UniqueConstraint(name = "unique_cpf_email", columnNames = {"cpf", "email"}))
 @Entity(name = "cliente")
 @Getter
 @Setter

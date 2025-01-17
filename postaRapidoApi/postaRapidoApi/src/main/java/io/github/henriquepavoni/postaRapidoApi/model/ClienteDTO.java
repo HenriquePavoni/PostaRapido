@@ -9,15 +9,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record ClienteDTO(
-        @NotEmpty
+
+        @NotEmpty(message = "{campo.nome.obrigatorio}")
         String nome,
 
-        @Email
+        @Email(message = "{campo.email.invalido}")
         String email,
 
         String telefone,
 
-        @CPF
+        @CPF(message = "{campo.cpf.invalido}")
+        @NotEmpty(message = "{campo.cpf.obrigatorio}")
         String cpf,
 
         @JsonFormat(pattern = "dd/MM/yyyy")
