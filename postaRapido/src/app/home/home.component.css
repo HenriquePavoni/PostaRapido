@@ -7,3 +7,59 @@
   background-color: #e9ecef;
   border-radius: 0.25rem;
 }
+
+.hero {
+  background-image: url('https://img.freepik.com/fotos-gratis/retrato-de-um-femininas-courier-com-pacote_23-2147862239.jpg?t=st=1737221643~exp=1737225243~hmac=1309bedb4c8e16ef81a975f89cd4a9593afe1b70ae509838bcea90cc8471054a&w=1380'); /* Imagem de fundo */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 200px 0;
+}
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+.section-item {
+  text-align: center;
+}
+.icon {
+  font-size: 50px;
+  color: orange;
+}
+.cta-button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.cta-button:hover {
+  background-color: #0056b3;
+}
+
+.carousel-inner {
+  text-align: center;
+  font-style: italic;
+  background-color: #f8f9fa;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.carousel-item p {
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.carousel-item small {
+  display: block;
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #007bff;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #007bff;
+}
