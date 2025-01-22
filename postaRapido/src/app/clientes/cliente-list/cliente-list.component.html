@@ -1,0 +1,51 @@
+<h1 class="mt-4">Clientes</h1>
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active fw-bold">Gerenciamento de Clientes</li>
+</ol>
+<div class="row justify-content-end">
+    <div class="col-md-2">
+        <button class="btn btn-warning" (click)="novoCliente()">
+            <i class="fa fa-plus"></i>
+            Novo Cliente
+        </button>
+    </div>
+</div>
+<br />
+<div class="container-fluid px-5">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th class="fw-bold">ID</th>
+                        <th class="fw-bold">Nome</th>
+                        <th class="fw-bold">Email</th>
+                        <th class="fw-bold">Telefone</th>
+                        <th class="fw-bold">CPF</th>
+                        <th class="fw-bold">Data Nascimento</th>
+                        <th class="fw-bold">Cidade</th>
+                        <th class="fw-bold">Estado</th>
+                        <th class="fw-bold">CEP</th>
+                        <th class="fw-bold">Data Cadastro</th>
+                        <th class="fw-bold">Ativo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let cliente of listaClientes">
+                        <td>{{ cliente.id }}</td>
+                        <td>{{ cliente.nome }}</td>
+                        <td>{{ cliente.email }}</td>
+                        <td>{{ cliente.telefone }}</td>
+                        <td>{{ cliente.cpf }}</td>
+                        <td>{{ cliente.dataNascimento }}</td>
+                        <td>{{ cliente.cidade }}</td>
+                        <td>{{ cliente.estado }}</td>
+                        <td>{{ cliente.cep}}</td>
+                        <td>{{ cliente.dataCadastro }}</td>
+                        <td>{{ cliente.ativo }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
