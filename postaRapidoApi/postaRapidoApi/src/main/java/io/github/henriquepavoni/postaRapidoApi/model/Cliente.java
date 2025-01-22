@@ -1,12 +1,11 @@
 package io.github.henriquepavoni.postaRapidoApi.model;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 
 @Table(name = "cliente", uniqueConstraints = @UniqueConstraint(name = "unique_cpf_email", columnNames = {"cpf", "email"}))
@@ -31,10 +30,10 @@ public class Cliente {
     @Column(length = 15)
     private String telefone;
 
-    @CPF
     @Column(unique = true, nullable = false, length = 11)
     private String cpf;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
@@ -50,8 +49,9 @@ public class Cliente {
     @Column(length = 8)
     private String cep;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_cadastro", updatable = false)
-    private LocalDateTime dataCadastro;
+    private LocalDate dataCadastro;
 
     @Column(length = 2)
     private boolean ativo;
@@ -66,12 +66,11 @@ public class Cliente {
         this.cidade = dto.cidade();
         this.estado = dto.estado();
         this.cep = dto.cep();
-        this.dataCadastro = dto.dataCadastro();
         this.ativo = dto.ativo();
     }
 
     @PrePersist
     public void preset() {
-        setDataCadastro(LocalDateTime.now());
+      setDataCadastro(LocalDate.now());
     }
 }

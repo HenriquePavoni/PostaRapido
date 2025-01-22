@@ -11,9 +11,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/clientes")
 @Validated
+@CrossOrigin("http://localhost:4200")
 public class ClienteController {
 
     private final ClienteRepository repository;
@@ -25,11 +28,18 @@ public class ClienteController {
         this.service = service;
     }
 
+    @GetMapping
+    public List<Cliente> buscaTodosClientes() {
+      return repository.findAll();
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente save(@RequestBody @Valid ClienteDTO dto) {
         service.verificaSeExisteCpfEmail(dto, null);
-        return repository.save(new Cliente(dto));
+        var teste = repository.save(new Cliente(dto));
+        System.out.println(teste.getDataCadastro());
+        return teste;
     }
 
     @GetMapping("{id}")

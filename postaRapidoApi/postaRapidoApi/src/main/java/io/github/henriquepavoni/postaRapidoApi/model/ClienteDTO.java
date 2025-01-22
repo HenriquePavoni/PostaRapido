@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public record ClienteDTO(
 
@@ -33,7 +32,7 @@ public record ClienteDTO(
 
         String cep,
 
-        LocalDateTime dataCadastro,
+        LocalDate dataCadastro,
 
         boolean ativo ){
 
