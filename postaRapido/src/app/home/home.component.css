@@ -9,7 +9,7 @@
 }
 
 .hero {
-  background-image: url('https://img.freepik.com/fotos-gratis/retrato-de-um-femininas-courier-com-pacote_23-2147862239.jpg?t=st=1737221643~exp=1737225243~hmac=1309bedb4c8e16ef81a975f89cd4a9593afe1b70ae509838bcea90cc8471054a&w=1380'); /* Imagem de fundo */
+  background-image: url('/assets/images/portrait-female-courier-with-parcel.jpg');
   background-size: cover;
   background-position: center;
   color: white;
