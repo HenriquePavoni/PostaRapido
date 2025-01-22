@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 import { ClientesModule } from './clientes/clientes.module';
 import { ClientesService } from './clientes.service';
 import { HttpClientModule } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { HttpClientModule } from '@angular/common/http';
     ClientesModule
   ],
   providers: [
-    ClientesService
+    ClientesService,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
