@@ -21,7 +21,6 @@ public record ClienteDTO(
         @NotEmpty(message = "{campo.cpf.obrigatorio}")
         String cpf,
 
-        @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate dataNascimento,
 
         String endereco,
@@ -32,6 +31,7 @@ public record ClienteDTO(
 
         String cep,
 
+        @JsonFormat(pattern = "dd/MM/yyyy")
         LocalDate dataCadastro,
 
         boolean ativo ){

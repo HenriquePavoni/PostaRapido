@@ -43,6 +43,11 @@
                         <td>{{ cliente.cep}}</td>
                         <td>{{ cliente.dataCadastro }}</td>
                         <td>{{ cliente.ativo }}</td>
+                        <td>
+                            <button class="btn btn-primary" routerLink="/cliente-form/{{ cliente.id }}">
+                                <i class="fa fa-solid fa-pen"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
