@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../cliente';
 import { ClientesService } from 'src/app/clientes.service';
 import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-cliente-list',
@@ -14,13 +15,21 @@ export class ClienteListComponent implements OnInit {
 
   constructor(
     private service: ClientesService,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
   ) { }
 
   ngOnInit(): void {
     this.service
       .getAllClientes()
-      .subscribe(resposta => this.listaClientes = resposta);
+      .subscribe(
+        resposta => {
+          this.listaClientes = resposta;
+
+          this.listaClientes.forEach(cliente => cliente.dataNascimento = this.datePipe
+            .transform(cliente.dataNascimento, 'dd/MM/yyyy'));
+        });
+      
   }
 
   novoCliente() {

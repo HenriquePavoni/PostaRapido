@@ -44,8 +44,13 @@
                         <td>{{ cliente.dataCadastro }}</td>
                         <td>{{ cliente.ativo }}</td>
                         <td>
-                            <button class="btn btn-primary" routerLink="/cliente-form/{{ cliente.id }}">
+                            <button class="btn btn-primary" routerLink="/cliente-form/update/{{ cliente.id }}">
                                 <i class="fa fa-solid fa-pen"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" routerLink="/cliente-form/delete/{{ cliente.id }}">
+                                <i class="fa fa-solid fa-eraser"></i>
                             </button>
                         </td>
                     </tr>

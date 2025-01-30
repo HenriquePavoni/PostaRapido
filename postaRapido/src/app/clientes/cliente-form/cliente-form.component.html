@@ -7,12 +7,18 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-success" role="alert" *ngIf="success == true && !cliente.id">
+                <div class="alert alert-success" role="alert" *ngIf="success == true 
+                    && (status != 'delete' && status != 'update')">
+
                     Cliente {{cliente.nome}} salvo com sucesso !
                 </div>
 
-                <div class="alert alert-success" role="alert" *ngIf="success == true && cliente.id">
+                <div class="alert alert-success" role="alert" *ngIf="success == true && status === 'update'">
                     Cliente {{cliente.nome}} atualizado com sucesso !
+                </div>
+
+                <div class="alert alert-success" role="alert" *ngIf="success == true && status == 'delete'">
+                    Cliente {{cliente.nome}} apagado com sucesso !
                 </div>
 
                 <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
@@ -109,14 +115,17 @@
 
         <div class="row">
             <div id="col-md-10">
-                <button type="button" class="btn btn-danger mr-2" (click)="voltaLista()">
+                <button type="button" class="btn btn-warning mr-2" (click)="voltaLista()">
                     <i class="fas fa-solid fa-arrow-left"></i> Voltar
                 </button>
-                <button type="submit" class="btn btn-success" *ngIf="!cliente.id">
+                <button type="submit" class="btn btn-success" *ngIf="status != 'delete' && status != 'update'">
                     <i class="fas fa-solid fa-plus"></i> Salvar
                 </button>
-                <button type="submit" class="btn btn-primary" *ngIf="cliente.id">
+                <button type="submit" class="btn btn-primary" *ngIf="status === 'update'">
                     <i class="fas fa-solid fa-plus"></i> Editar
+                </button>
+                <button type="submit" class="btn btn-danger" *ngIf="status === 'delete'">
+                    <i class="fas fa-solid fa-plus"></i> Apagar
                 </button>
             </div>
         </div>
