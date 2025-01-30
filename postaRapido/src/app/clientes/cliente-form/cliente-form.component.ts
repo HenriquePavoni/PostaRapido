@@ -15,6 +15,7 @@ export class ClienteFormComponent implements OnInit {
   success: boolean = false;
   errors: String[];
   id: number;
+  status: String;
 
 
   constructor(
@@ -27,9 +28,12 @@ export class ClienteFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let params: Params = this.activatedRoute.params;
-    if (params && params.value && params.value.id) {
-      this.id = params.value.id;
+    let params: Params = this.activatedRoute.snapshot.params;
+
+    if (params['id']) {
+      this.id = params['id'];
+      this.status = params['status'];
+
       this.service
         .getClienteById(this.id)
         .subscribe(
@@ -43,23 +47,43 @@ export class ClienteFormComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.id) {
+    if (this.status === 'update') {
       this.service
         .updateCliente(this.cliente)
-        .subscribe(
-          response => {
-            this.success = true;
+        .subscribe(response => {
+          this.success = true;
+          this.errors = null;
+
+          setTimeout(() => {
+            this.success = false;
+          }, 3000);
+        }, errorResponse => {
+          this.errors = errorResponse.error.errors;
+
+          setTimeout(() => {
             this.errors = null;
-            setTimeout(() => {
-              this.success = false;
-            }, 3000);
-          }, errorResponse => {
-            this.errors = errorResponse.error.errors;
-            setTimeout(() => {
-              this.errors = null;
-            }, 3000);
-          }
-        );
+          }, 3000);
+        });
+      return;
+    }
+
+    if (this.status === 'delete') {
+      this.service
+        .deleteCliente(this.cliente)
+        .subscribe(response => {
+          this.success = true;
+          this.errors = null;
+
+          setTimeout(() => {
+            this.success = false;
+          }, 3000);
+        }, errorResponse => {
+          this.errors = errorResponse.error.errors;
+
+          setTimeout(() => {
+            this.errors = null;
+          }, 3000);
+        })
       return;
     }
 
@@ -67,7 +91,7 @@ export class ClienteFormComponent implements OnInit {
       .transform(this.cliente.dataNascimento, 'dd/MM/yyyy');
 
     this.service
-      .salvar(this.cliente)
+      .save(this.cliente)
       .subscribe(response => {
         this.success = true;
         this.errors = null;
@@ -85,12 +109,6 @@ export class ClienteFormComponent implements OnInit {
           this.errors = null;
         }, 3000);
       });
-  }
-
-  prepareUpdate(id: number) {
-    this.service
-      .getClienteById(id)
-      .subscribe(resposta => this.cliente = resposta);
   }
 
   voltaLista() {
