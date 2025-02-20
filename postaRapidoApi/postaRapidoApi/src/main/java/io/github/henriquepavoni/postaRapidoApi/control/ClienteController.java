@@ -37,9 +37,7 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente save(@RequestBody @Valid ClienteDTO dto) {
         service.verificaSeExisteCpfEmail(dto, null);
-        var teste = repository.save(new Cliente(dto));
-        System.out.println(teste.getDataCadastro());
-        return teste;
+        return repository.save(new Cliente(dto));
     }
 
     @GetMapping("{id}")
