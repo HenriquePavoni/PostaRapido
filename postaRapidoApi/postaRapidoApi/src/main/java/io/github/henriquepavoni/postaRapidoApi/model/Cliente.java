@@ -33,6 +33,7 @@ public class Cliente {
     @Column(unique = true, nullable = false, length = 11)
     private String cpf;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_nascimento")
     private LocalDate dataNascimento;
 
