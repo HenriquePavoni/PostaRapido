@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "postaRapido"
+    }
+  },
+  "defaultProject": "postaRapido",
+  "cli": {
+    "analytics": "9cad0991-2403-4730-bb1f-b78cbb777840"
+  }
 }

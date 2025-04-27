@@ -9,6 +9,8 @@ import { ClientesModule } from './clientes/clientes.module';
 import { ClientesService } from './clientes.service';
 import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { PedidoService } from './pedido.service';
+import { PedidosModule } from './pedidos/pedidos.module';
 
 @NgModule({
   declarations: [
@@ -20,10 +22,12 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
-    ClientesModule
+    ClientesModule,
+    PedidosModule
   ],
   providers: [
     ClientesService,
+    PedidoService,
     DatePipe
   ],
   bootstrap: [AppComponent]
