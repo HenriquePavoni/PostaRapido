@@ -13,6 +13,7 @@ public record ClienteDTO(
         String nome,
 
         @Email(message = "{campo.email.invalido}")
+        @NotEmpty(message = "{campo.email.obrigatorio}")
         String email,
 
         String telefone,
