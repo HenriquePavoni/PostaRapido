@@ -44,6 +44,7 @@ public class Pedido {
       parse(dto.dataPedido(), DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     this.status = dto.status();
     this.detalhes = dto.detalhes();
+    this.cliente = dto.cliente();
   }
 
 }

@@ -8,6 +8,7 @@ import io.github.henriquepavoni.postaRapidoApi.model.PedidoDTO;
 import io.github.henriquepavoni.postaRapidoApi.repository.ClienteRepository;
 import io.github.henriquepavoni.postaRapidoApi.repository.PedidoRepository;
 import io.github.henriquepavoni.postaRapidoApi.util.ConverterStringToBigDecimal;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
@@ -40,14 +41,16 @@ public class PedidoController {
 
   @GetMapping("{id}")
   public Pedido buscaPorId(@PathVariable Integer id) {
+
     return pedidoRepository.findById(id)
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
+
   }
 
   @PostMapping()
   @ResponseStatus(HttpStatus.CREATED)
-  public Pedido salvaPedido(@RequestBody PedidoDTO pedidoDTO) {
-    Cliente cliente = clienteRepository.findById(pedidoDTO.idCliente())
+  public Pedido salvaPedido(@RequestBody @Valid PedidoDTO pedidoDTO) {
+    Cliente cliente = clienteRepository.findById(pedidoDTO.cliente().getId())
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
     Pedido pedido = new Pedido(pedidoDTO);
@@ -70,7 +73,7 @@ public class PedidoController {
   @PutMapping("{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void updatePedido(@PathVariable Integer id, @RequestBody PedidoDTO pedidoDTO) {
-    Cliente cliente = clienteRepository.findById(pedidoDTO.idCliente())
+    Cliente cliente = clienteRepository.findById(pedidoDTO.cliente().getId())
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
     Pedido pedido = new Pedido(pedidoDTO);

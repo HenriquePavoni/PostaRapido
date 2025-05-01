@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @Table(name = "cliente", uniqueConstraints = @UniqueConstraint(name = "unique_cpf_email", columnNames = {"cpf", "email"}))
@@ -35,7 +36,7 @@ public class Cliente {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     @Column(name = "data_nascimento")
-    private LocalDate dataNascimento;
+    private Date dataNascimento;
 
     @Column(length = 255)
     private String endereco;
