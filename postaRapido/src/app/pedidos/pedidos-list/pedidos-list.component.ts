@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pedido } from '../pedido';
 import { PedidoService } from 'src/app/pedido.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pedidos-list',
@@ -13,6 +14,7 @@ export class PedidosListComponent implements OnInit {
 
   constructor(
     private service: PedidoService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -26,7 +28,7 @@ export class PedidosListComponent implements OnInit {
   }
 
   novoPedido() {
-    
+    this.router.navigate(['/pedidos-form'])
   }
 
 }

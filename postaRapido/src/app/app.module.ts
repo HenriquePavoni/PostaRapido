@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { PedidoService } from './pedido.service';
 import { PedidosModule } from './pedidos/pedidos.module';
+import localePt from '@angular/common/locales/pt';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PedidosModule } from './pedidos/pedidos.module';
   providers: [
     ClientesService,
     PedidoService,
-    DatePipe
+    DatePipe,
+    { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
   bootstrap: [AppComponent]
 })

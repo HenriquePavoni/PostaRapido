@@ -1,9 +1,106 @@
 <h1 class="mt-4">Pedidos</h1>
 <ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active fw-bold">Gerenciamento de Clientes</li>
+    <li class="breadcrumb-item active fw-bold">Gerenciamento de Pedidos</li>
 </ol>
 <div class="container">
     <form #PedidoForm="ngForm" (ngSubmit)="onSubmit()">
-        
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-success" role="alert" *ngIf="success == true 
+                    && (status != 'delete' && status != 'update')">
+
+                    Pedido de {{pedido.cliente.nome}} salvo com sucesso !
+                </div>
+
+                <div class="alert alert-success" role="alert" *ngIf="success == true && status === 'update'">
+                    Pedido de {{pedido.cliente.nome}} atualizado com sucesso !
+                </div>
+
+                <div class="alert alert-success" role="alert" *ngIf="success == true && status == 'delete'">
+                    Pedido de {{pedido.cliente.nome}} apagado com sucesso !
+                </div>
+
+                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
+                    {{ error }}
+                </div>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="pedido.id">
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>ID:</label>
+                    <input type="text" name="id" [(ngModel)]="pedido.id" class="form-control" [disabled]="true" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Data Pedido:</label>
+                    <input type="text" name="dataPedido" [(ngModel)]="pedido.dataPedido" class="form-control"
+                        [disabled]="id" placeholder="10/10/2010" />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label>Cliente:</label>
+                    <select class="form-select" name="cliente" id="cliente" [(ngModel)]="pedido.cliente"
+                        [disabled]="status === 'delete'">
+                        <option value="" *ngIf="status != 'update'">Selecione o cliente</option>
+                        <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">
+                            {{ cliente.nome }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>Detalhes:</label>
+                    <textarea rows="10" name="detalhes" [(ngModel)]="pedido.detalhes" class="form-control"
+                        placeholder="Detalhamento sobre o pedido" [disabled]="status === 'delete'">
+                        {{ pedido.detalhes }}
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label>Valor:</label>
+                <div class="form-group d-flex align-items-center">
+                    <input type="text" name="valor" [(ngModel)]="pedido.valor" class="form-control"
+                        placeholder="29.90" [disabled]="status === 'delete'"/>
+                    <span class="ml-2">R$</span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Status:</label>
+                    <input type="text" name="status" [(ngModel)]="pedido.status" class="form-control"
+                        placeholder="Entregue" [disabled]="status === 'delete'"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-warning mr-2 w-25" (click)="voltarLista()">
+                        <i class="fas fa-solid fa-arrow-left"></i> Voltar
+                    </button>
+                    <button type="submit" class="btn btn-success mr-2 w-25"
+                        *ngIf="status != 'delete' && status != 'update'">
+                        <i class="fas fa-solid fa-plus"></i> Salvar
+                    </button>
+                    <button type="submit" class="btn btn-success mr-2 w-25" *ngIf="status == 'update'">
+                        <i class="fas fa-solid fa-plus"></i> Editar
+                    </button>
+                    <button type="submit" class="btn btn-danger mr-2 w-25" *ngIf="status == 'delete'">
+                        <i class="fas fa-solid fa-plus"></i> Deletar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <br>
     </form>
 </div>

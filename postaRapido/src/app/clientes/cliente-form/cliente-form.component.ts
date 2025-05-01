@@ -21,7 +21,6 @@ export class ClienteFormComponent implements OnInit {
   constructor(
     private service: ClientesService,
     private router: Router,
-    private datePipe: DatePipe,
     private activatedRoute: ActivatedRoute
   ) {
     this.cliente = new Cliente();
@@ -87,9 +86,6 @@ export class ClienteFormComponent implements OnInit {
       return;
     }
 
-    this.cliente.dataNascimento = this.datePipe
-      .transform(this.cliente.dataNascimento, 'dd/MM/yyyy');
-
     this.service
       .save(this.cliente)
       .subscribe(response => {
@@ -114,12 +110,5 @@ export class ClienteFormComponent implements OnInit {
   voltaLista() {
     this.router.navigate(['cliente-list'])
   }
-
-  formatarData(data: string): string {
-    const partes = data.split('/');
-    const ano = partes[2];
-    const mes = partes[1].padStart(2, '0');
-    const dia = partes[0].padStart(2, '0');
-    return `${ano}-${mes}-${dia}`;
-  }
+  
 }
