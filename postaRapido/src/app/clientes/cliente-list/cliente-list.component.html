@@ -42,7 +42,7 @@
                         <td>{{ cliente.estado }}</td>
                         <td>{{ cliente.cep}}</td>
                         <td>{{ cliente.dataCadastro }}</td>
-                        <td>{{ cliente.ativo }}</td>
+                        <td>{{ cliente.ativo ? 'Ativo' : 'Desativado' }}</td>
                         <td>
                             <button class="btn btn-primary" routerLink="/cliente-form/update/{{ cliente.id }}">
                                 <i class="fa fa-solid fa-pen"></i>

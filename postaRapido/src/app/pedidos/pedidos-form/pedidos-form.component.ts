@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PedidoService } from 'src/app/pedido.service';
 import { ClientesService } from 'src/app/clientes.service';
 import { Cliente } from 'src/app/clientes/cliente';
+import { STATUS_PEDIDO } from '../enum';
 
 @Component({
   selector: 'app-pedidos-form',
@@ -18,6 +19,7 @@ export class PedidosFormComponent implements OnInit {
   listaClientes: Cliente[] = [];
   success: boolean = false;
   errors: String[];
+  statusPedidoList = STATUS_PEDIDO;
 
   constructor(
     private activatedRoute: ActivatedRoute,

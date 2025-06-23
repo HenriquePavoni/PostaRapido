@@ -48,7 +48,6 @@
                     <label>Cliente:</label>
                     <select class="form-select" name="cliente" id="cliente" [(ngModel)]="pedido.cliente"
                         [disabled]="status === 'delete'">
-                        <option value="" *ngIf="status != 'update'">Selecione o cliente</option>
                         <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">
                             {{ cliente.nome }}
                         </option>
@@ -71,16 +70,20 @@
             <div class="col-md-6">
                 <label>Valor:</label>
                 <div class="form-group d-flex align-items-center">
-                    <input type="text" name="valor" [(ngModel)]="pedido.valor" class="form-control"
-                        placeholder="29.90" [disabled]="status === 'delete'"/>
+                    <input type="text" name="valor" [(ngModel)]="pedido.valor" class="form-control" placeholder="29.90"
+                        [disabled]="status === 'delete'" />
                     <span class="ml-2">R$</span>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Status:</label>
-                    <input type="text" name="status" [(ngModel)]="pedido.status" class="form-control"
-                        placeholder="Entregue" [disabled]="status === 'delete'"/>
+                    <select type="text" name="status" [(ngModel)]="pedido.status" class="form-select"
+                        [disabled]="status === 'delete'">
+                        <option *ngFor="let status of statusPedidoList" [ngValue]="status.codigo">
+                            {{ status.descricao }}
+                        </option>
+                    </select>
                 </div>
             </div>
             <div class="row">
