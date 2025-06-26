@@ -19,8 +19,6 @@ import java.math.BigDecimal;
 import java.util.List;
 @RestController
 @RequestMapping("/api/pedido")
-@Validated
-@CrossOrigin("http://localhost:4200")
 public class PedidoController {
   private final PedidoRepository pedidoRepository;
   private final ClienteRepository clienteRepository;

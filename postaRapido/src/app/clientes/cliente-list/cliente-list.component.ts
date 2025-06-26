@@ -12,6 +12,7 @@ import { DatePipe } from '@angular/common';
 export class ClienteListComponent implements OnInit {
 
   listaClientes: Cliente[] = [];
+  mensagens: String[] = [];
 
   constructor(
     private service: ClientesService,
@@ -29,10 +30,13 @@ export class ClienteListComponent implements OnInit {
           this.listaClientes.forEach(cliente => cliente.dataNascimento = this.datePipe
             .transform(cliente.dataNascimento, 'dd/MM/yyyy'));
         });
-      
+    const state = window.history.state;
+    if (state && state.mensagens) {
+      this.mensagens = Array.isArray(state.mensagens) ? state.mensagens : [state.mensagens];
+    }
   }
 
   novoCliente() {
-    this.router.navigate(['/cliente-form'])
+    this.router.navigate([`/cliente-form/create`])
   }
 }

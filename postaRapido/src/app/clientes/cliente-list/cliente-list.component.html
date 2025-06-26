@@ -12,6 +12,9 @@
 </div>
 <br />
 <div class="container-fluid px-5">
+    <div class="alert alert-success" role="alert" *ngFor="let mensagem of mensagens">
+        {{ mensagem }}
+    </div>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover">

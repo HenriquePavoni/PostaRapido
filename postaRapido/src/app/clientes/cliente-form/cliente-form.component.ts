@@ -29,10 +29,10 @@ export class ClienteFormComponent implements OnInit {
   ngOnInit(): void {
     let params: Params = this.activatedRoute.snapshot.params;
 
-    if (params['id']) {
-      this.id = params['id'];
-      this.status = params['status'];
+    this.id = params['id'];
+    this.status = params['status'];
 
+    if (this.id != null) {
       this.service
         .getClienteById(this.id)
         .subscribe(
@@ -52,6 +52,7 @@ export class ClienteFormComponent implements OnInit {
         .subscribe(response => {
           this.success = true;
           this.errors = null;
+          this.enviaMensagens();
 
           setTimeout(() => {
             this.success = false;
@@ -72,6 +73,7 @@ export class ClienteFormComponent implements OnInit {
         .subscribe(response => {
           this.success = true;
           this.errors = null;
+          this.enviaMensagens();
 
           setTimeout(() => {
             this.success = false;
@@ -86,29 +88,50 @@ export class ClienteFormComponent implements OnInit {
       return;
     }
 
-    this.service
-      .save(this.cliente)
-      .subscribe(response => {
-        this.success = true;
-        this.errors = null;
-        this.cliente = response;
-
-        setTimeout(() => {
-          this.success = false;
-        }, 3000);
-
-      }, errorResponse => {
-        this.success = false;
-        this.errors = errorResponse.error.errors;
-
-        setTimeout(() => {
+    if (this.status === 'create') {
+      this.service
+        .save(this.cliente)
+        .subscribe(response => {
+          this.success = true;
           this.errors = null;
-        }, 3000);
-      });
+          this.cliente = response;
+          this.enviaMensagens();
+
+          setTimeout(() => {
+            this.success = false;
+          }, 3000);
+
+        }, errorResponse => {
+          this.success = false;
+          this.errors = errorResponse.error.errors;
+
+          setTimeout(() => {
+            this.errors = null;
+          }, 3000);
+        });
+    }
   }
 
   voltaLista() {
     this.router.navigate(['cliente-list'])
   }
-  
+
+  enviaMensagens() {
+
+    if (this.errors != null) {
+      this.router.navigate(['cliente-list'], {
+        state: { mensagens: this.errors }
+      });
+    }
+
+    let msg = '';
+    if (this.status === 'create') msg = 'Cliente cadastrado com sucesso.';
+    if (this.status === 'update') msg = 'Cliente atualizado com sucesso.';
+    if (this.status === 'delete') msg = 'Cliente excluído com sucesso.';
+
+    this.router.navigate(['cliente-list'], {
+      state: { mensagens: [msg] }
+    });
+  }
+
 }

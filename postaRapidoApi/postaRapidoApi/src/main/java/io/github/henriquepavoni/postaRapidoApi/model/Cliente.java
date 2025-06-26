@@ -35,7 +35,7 @@ public class Cliente {
     private String cpf;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
-    @Column(name = "data_nascimento")
+    @Column(name = "data_nascimento", nullable = true)
     private Date dataNascimento;
 
     @Column(length = 255)

@@ -4,7 +4,7 @@ CREATE TABLE cliente (
     email VARCHAR(100) NOT NULL,
     telefone VARCHAR(20),
     cpf VARCHAR(14) UNIQUE NOT NULL,
-    data_nascimento DATE NOT NULL,
+    data_nascimento DATE,
     endereco VARCHAR(200),
     cidade VARCHAR(100),
     estado VARCHAR(50),
