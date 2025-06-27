@@ -1,17 +1,20 @@
 package io.github.henriquepavoni.postaRapidoApi.model;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
+import java.math.BigDecimal;
+
 public record PedidoDTO(
-  @NotBlank(message = "{campo.data.pedido.obrigatorio}")
+  @NotEmpty(message = "{campo.data.pedido.obrigatorio}")
   String dataPedido,
-  @NotBlank(message = "{campo.status.obrigatorio}")
+  @NotEmpty(message = "{campo.status.obrigatorio}")
   String status,
-  @NotBlank(message = "{campo.detalhes.obrigatorio}")
+  @NotEmpty(message = "{campo.detalhes.obrigatorio}")
   String detalhes,
-  @NotBlank(message = "{campo.status.valor}")
-  String valor,
+  @NotNull(message = "{campo.status.valor}")
+  BigDecimal valor,
   @NotNull(message = "{campo.cliente.obrigatorio}")
   Cliente cliente
 ) {

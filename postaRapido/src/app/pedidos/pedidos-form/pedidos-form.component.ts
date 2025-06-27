@@ -32,37 +32,33 @@ export class PedidosFormComponent implements OnInit {
 
   ngOnInit(): void {
     let params: Params = this.activatedRoute.snapshot.params;
-
-    this.clienteService
-      .getAllClientes()
-      .subscribe(
-        resposta => {
-          this.listaClientes = resposta;
-        });
-
-    if (params['id']) {
-      this.id = params['id'];
-      this.status = params['status'];
-
-      this.pedidoSerivce
-        .getPedidoById(this.id)
-        .subscribe(response => {
+    this.id = params['id'];
+    this.status = params['status'];
+  
+    this.clienteService.getAllClientes().subscribe(clientes => {
+      this.listaClientes = clientes;
+  
+      if (this.id) {
+        this.pedidoSerivce.getPedidoById(this.id).subscribe(response => {
           this.pedido = response;
-
-          this.pedido.cliente = this.listaClientes.find(c => c.id ==this.pedido.cliente.id);
-        }, ErrorResponse => {
+          this.pedido.cliente = this.listaClientes.find(c => c.id === this.pedido.cliente.id);
+        }, errorResponse => {
           this.pedido = new Pedido();
-        })
-    }
+        });
+      }
+    });
   }
+  
 
   onSubmit() {
+    this.pedido.cliente = this.listaClientes.find(c => c.id == this.pedido.cliente.id);
     if (this.status == 'update') {
       this.pedidoSerivce
         .updatePedido(this.pedido)
         .subscribe(response => {
           this.success = true;
           this.errors = null;
+          this.enviaMensagens();
 
           setTimeout(() => {
             this.success = false;
@@ -84,6 +80,7 @@ export class PedidosFormComponent implements OnInit {
         .subscribe(response => {
           this.success = true;
           this.errors = null;
+          this.enviaMensagens();
 
           setTimeout(() => {
             this.success = false;
@@ -99,27 +96,48 @@ export class PedidosFormComponent implements OnInit {
       return;
     }
 
-    this.pedidoSerivce
-      .save(this.pedido)
-      .subscribe(response => {
-        this.success = true;
-        this.errors = null;
-        this.pedido = response;
-
-        setTimeout(() => {
-          this.success = false;
-        }, 3000);
-      }, errorResponse => {
-        this.success = false;
-        this.errors = errorResponse.error.errors;
-
-        setTimeout(() => {
+    if (this.status == 'create') {
+      this.pedidoSerivce
+        .save(this.pedido)
+        .subscribe(response => {
+          this.success = true;
           this.errors = null;
-        }, 3000);
-      });
+          this.pedido = response;
+          this.enviaMensagens();
+
+          setTimeout(() => {
+            this.success = false;
+          }, 3000);
+        }, errorResponse => {
+          this.success = false;
+          this.errors = errorResponse.error.errors;
+
+          setTimeout(() => {
+            this.errors = null;
+          }, 3000);
+        });
+    }
   }
 
   voltarLista() {
-    this.router.navigate(['/pedidos-list'])
+    this.router.navigate(['pedidos-list'])
+  }
+
+  enviaMensagens() {
+
+    if (this.errors != null) {
+      this.router.navigate(['cliente-list'], {
+        state: { mensagens: this.errors }
+      });
+    }
+
+    let msg = '';
+    if (this.status === 'create') msg = 'Pedido cadastrado com sucesso.';
+    if (this.status === 'update') msg = 'Pedido atualizado com sucesso.';
+    if (this.status === 'delete') msg = 'Pedido excluído com sucesso.';
+
+    this.router.navigate(['pedidos-list'], {
+      state: { mensagens: [msg] }
+    });
   }
 }

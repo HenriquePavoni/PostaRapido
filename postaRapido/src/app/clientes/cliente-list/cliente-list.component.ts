@@ -33,6 +33,10 @@ export class ClienteListComponent implements OnInit {
     const state = window.history.state;
     if (state && state.mensagens) {
       this.mensagens = Array.isArray(state.mensagens) ? state.mensagens : [state.mensagens];
+      
+      setTimeout(() => {
+        this.mensagens = null;
+      }, 3000);
     }
   }
 

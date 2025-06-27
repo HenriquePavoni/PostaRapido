@@ -7,11 +7,9 @@ import io.github.henriquepavoni.postaRapidoApi.model.Pedido;
 import io.github.henriquepavoni.postaRapidoApi.model.PedidoDTO;
 import io.github.henriquepavoni.postaRapidoApi.repository.ClienteRepository;
 import io.github.henriquepavoni.postaRapidoApi.repository.PedidoRepository;
-import io.github.henriquepavoni.postaRapidoApi.util.ConverterStringToBigDecimal;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,14 +20,11 @@ import java.util.List;
 public class PedidoController {
   private final PedidoRepository pedidoRepository;
   private final ClienteRepository clienteRepository;
-  private final ConverterStringToBigDecimal conversorBigDecimal;
 
   @Autowired
-  public PedidoController(PedidoRepository pedidoRepository, ClienteRepository clienteRepository,
-                          ConverterStringToBigDecimal conversorBigDecimal) {
+  public PedidoController(PedidoRepository pedidoRepository, ClienteRepository clienteRepository) {
     this.pedidoRepository = pedidoRepository;
     this.clienteRepository = clienteRepository;
-    this.conversorBigDecimal = conversorBigDecimal;
   }
 
   @GetMapping
@@ -52,8 +47,7 @@ public class PedidoController {
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
     Pedido pedido = new Pedido(pedidoDTO);
-    BigDecimal valorDecimal = conversorBigDecimal.converter(pedidoDTO.valor());
-    pedido.setValor(valorDecimal);
+    pedido.setValor(pedidoDTO.valor());
     pedido.setCliente(cliente);
 
     return pedidoRepository.save(pedido);
@@ -69,20 +63,17 @@ public class PedidoController {
   }
 
   @PutMapping("{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void updatePedido(@PathVariable Integer id, @RequestBody PedidoDTO pedidoDTO) {
+  @ResponseStatus(HttpStatus.OK)
+  public Pedido updatePedido(@PathVariable Integer id, @RequestBody PedidoDTO pedidoDTO) {
     Cliente cliente = clienteRepository.findById(pedidoDTO.cliente().getId())
       .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
 
-    Pedido pedido = new Pedido(pedidoDTO);
-
-    pedidoRepository.findById(id).map(tempPedido -> {
+    return pedidoRepository.findById(id).map(tempPedido -> {
+      Pedido pedido = new Pedido(pedidoDTO);
       pedido.setId(tempPedido.getId());
-      BigDecimal valorDecimal = conversorBigDecimal.converter(pedidoDTO.valor());
-      pedido.setValor(valorDecimal);
+      pedido.setValor(pedidoDTO.valor());
       pedido.setCliente(cliente);
-      pedidoRepository.save(pedido);
-      return Void.TYPE;
+      return pedidoRepository.save(pedido);
     }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Pedido não encontrado"));
   }
 }

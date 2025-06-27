@@ -11,24 +11,34 @@ import { Router } from '@angular/router';
 export class PedidosListComponent implements OnInit {
 
   listaPedidos: Pedido[] = [];
+  mensagens: String[] = [];
 
   constructor(
     private service: PedidoService,
     private router: Router,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.service
-    .getAllPedidos()
-    .subscribe(
-      resposta => {
-        this.listaPedidos = resposta;
-      }
-    )
+      .getAllPedidos()
+      .subscribe(
+        resposta => {
+          this.listaPedidos = resposta;
+        }
+      )
+
+    const state = window.history.state;
+    if (state && state.mensagens) {
+      this.mensagens = Array.isArray(state.mensagens) ? state.mensagens : [state.mensagens];
+
+      setTimeout(() => {
+        this.mensagens = null;
+      }, 3000);
+    }
   }
 
   novoPedido() {
-    this.router.navigate(['/pedidos-form'])
+    this.router.navigate(['/pedidos-form/create'])
   }
 
 }

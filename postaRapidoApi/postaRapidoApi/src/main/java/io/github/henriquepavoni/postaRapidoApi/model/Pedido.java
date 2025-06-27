@@ -1,7 +1,6 @@
 package io.github.henriquepavoni.postaRapidoApi.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import io.github.henriquepavoni.postaRapidoApi.util.ConverterStringToBigDecimal;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +21,7 @@ public class Pedido {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
-  @ManyToOne
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "id_cliente")
   private Cliente cliente;
 
