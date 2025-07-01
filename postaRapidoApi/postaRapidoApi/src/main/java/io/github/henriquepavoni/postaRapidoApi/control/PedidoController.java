@@ -32,6 +32,14 @@ public class PedidoController {
     return pedidoRepository.findAll();
   }
 
+  @GetMapping("/filtro")
+  public List<Pedido> buscaPedidosFiltro(
+    @RequestParam(value = "nomeCliente", required = false, defaultValue = "") String nomeCliente,
+    @RequestParam(value = "statusPedido", required = false, defaultValue = "") String statusPedido
+  ) {
+    return pedidoRepository.findByNomeClienteOrStatus("%"+nomeCliente+"%", statusPedido);
+  }
+
   @GetMapping("{id}")
   public Pedido buscaPorId(@PathVariable Integer id) {
 
