@@ -15,8 +15,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clientes")
-@Validated
-@CrossOrigin("http://localhost:4200")
 public class ClienteController {
 
     private final ClienteRepository repository;

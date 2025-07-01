@@ -8,10 +8,12 @@ import { HomeComponent } from './home/home.component';
 import { ClientesModule } from './clientes/clientes.module';
 import { ClientesService } from './clientes.service';
 import { HttpClientModule } from '@angular/common/http';
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { PedidoService } from './pedido.service';
 import { PedidosModule } from './pedidos/pedidos.module';
 import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [

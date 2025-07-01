@@ -2,6 +2,38 @@
 <ol class="breadcrumb mb-4">
     <li class="breadcrumb-item active fw-bold">Gerenciamento de Pedidos</li>
 </ol>
+<form #buscaPedidoForm="ngForm" (ngSubmit)="buscar()">
+    <fieldset class="p-3 border rounded mb-4">
+        <legend class="w-auto px-2">Filtros</legend>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="filtroNomeCliente">Nome Cliente:</label>
+                    <input type="text" id="filtroNomeCliente" name="filtroNomeCliente" [(ngModel)]="filtroNomeCliente" 
+                        class="form-control">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="filtroStatusPedido">Status Pedido:</label>
+                    <select [(ngModel)]="filtroStatusPedido" name="filtroStatusPedido" class="form-select">
+                        <option value="">Selecione...</option>
+                        <option *ngFor="let status of statusPedidoList" [ngValue]="status.descricao">
+                            {{ status.descricao }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fa fa-search"></i> Pesquisar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
 <div class="row justify-content-end">
     <div class="col-md-2">
         <button class="btn btn-warning" (click)="novoPedido()">
@@ -12,6 +44,14 @@
 </div>
 <br />
 <div class="container-fluid px-5">
+    <div class="alert alert-success" role="alert" *ngFor="let mensagem of mensagens">
+        {{ mensagem }}
+    </div>
+    <div class="row">
+        <div class="alert alert-warning" role="alert" *ngIf="mensagemTabela">
+            {{ mensagemTabela }}
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <table class="table table-hover">

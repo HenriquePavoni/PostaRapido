@@ -6,5 +6,5 @@ export class Pedido {
     dataPedido: string;
     status: string;
     detalhes: string;
-    valor: string;
+    valor: number;
 }

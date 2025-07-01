@@ -7,20 +7,6 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-success" role="alert" *ngIf="success == true 
-                    && (status != 'delete' && status != 'update')">
-
-                    Pedido de {{pedido.cliente.nome}} salvo com sucesso !
-                </div>
-
-                <div class="alert alert-success" role="alert" *ngIf="success == true && status === 'update'">
-                    Pedido de {{pedido.cliente.nome}} atualizado com sucesso !
-                </div>
-
-                <div class="alert alert-success" role="alert" *ngIf="success == true && status == 'delete'">
-                    Pedido de {{pedido.cliente.nome}} apagado com sucesso !
-                </div>
-
                 <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
                     {{ error }}
                 </div>
