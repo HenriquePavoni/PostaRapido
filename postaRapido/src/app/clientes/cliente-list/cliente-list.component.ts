@@ -26,9 +26,6 @@ export class ClienteListComponent implements OnInit {
       .subscribe(
         resposta => {
           this.listaClientes = resposta;
-
-          this.listaClientes.forEach(cliente => cliente.dataNascimento = this.datePipe
-            .transform(cliente.dataNascimento, 'dd/MM/yyyy'));
         });
     const state = window.history.state;
     if (state && state.mensagens) {
