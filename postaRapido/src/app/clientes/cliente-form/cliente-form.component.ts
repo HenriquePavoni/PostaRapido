@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../cliente';
 import { ClientesService } from 'src/app/clientes.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { DatePipe } from '@angular/common';
+import { CepService } from 'src/app/cep.service';
+import { Cep } from 'src/app/cep';
 
 @Component({
   selector: 'app-cliente-form',
@@ -16,14 +17,17 @@ export class ClienteFormComponent implements OnInit {
   errors: String[];
   id: number;
   status: String;
+  cep: Cep;
 
 
   constructor(
-    private service: ClientesService,
+    private clienteService: ClientesService,
+    private cepService: CepService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
     this.cliente = new Cliente();
+    this.cep = new Cep();
   }
 
   ngOnInit(): void {
@@ -33,7 +37,7 @@ export class ClienteFormComponent implements OnInit {
     this.status = params['status'];
 
     if (this.id != null) {
-      this.service
+      this.clienteService
         .getClienteById(this.id)
         .subscribe(
           response => {
@@ -45,9 +49,20 @@ export class ClienteFormComponent implements OnInit {
     }
   }
 
+  completaCep() {
+    this.cepService.getBuscaCep(this.cliente.cep)
+    .subscribe(response => {
+      this.cep = response;
+      
+      this.cliente.endereco = this.cep.logradouro;
+      this.cliente.cidade = this.cep.localidade;
+      this.cliente.estado = this.cep.uf;
+    })
+  }
+
   onSubmit() {
     if (this.status === 'update') {
-      this.service
+      this.clienteService
         .updateCliente(this.cliente)
         .subscribe(response => {
           this.success = true;
@@ -68,7 +83,7 @@ export class ClienteFormComponent implements OnInit {
     }
 
     if (this.status === 'delete') {
-      this.service
+      this.clienteService
         .deleteCliente(this.cliente)
         .subscribe(response => {
           this.success = true;
@@ -89,7 +104,7 @@ export class ClienteFormComponent implements OnInit {
     }
 
     if (this.status === 'create') {
-      this.service
+      this.clienteService
         .save(this.cliente)
         .subscribe(response => {
           this.success = true;
