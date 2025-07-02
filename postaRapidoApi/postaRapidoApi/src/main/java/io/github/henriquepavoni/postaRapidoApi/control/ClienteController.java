@@ -51,6 +51,7 @@ public class ClienteController {
 
         repository.findById(id)
                 .map( cliente -> {
+                    service.verificaPedidoVinculadoCliente(cliente);
                     repository.delete(cliente);
                     return Void.TYPE;
                 })
