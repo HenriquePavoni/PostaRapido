@@ -16,4 +16,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
     @Query("SELECT COUNT(c) FROM cliente c WHERE c.email = :email AND c.id != :clienteId")
     long countByEmailAndNotId(String email, Integer clienteId);
+
 }
