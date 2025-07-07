@@ -12,15 +12,19 @@ import { DatePipe, registerLocaleData } from '@angular/common';
 import { PedidoService } from './pedido.service';
 import { PedidosModule } from './pedidos/pedidos.module';
 import localePt from '@angular/common/locales/pt';
+import { LoginComponent } from './login/login.component';
+import { FormsModule } from '@angular/forms';
 
 registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
