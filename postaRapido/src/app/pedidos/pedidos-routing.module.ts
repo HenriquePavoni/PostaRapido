@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PedidosListComponent } from './pedidos-list/pedidos-list.component';
 import { PedidosFormComponent } from './pedidos-form/pedidos-form.component';
+import { LayoutComponent } from '../layout/layout.component';
 
 
 const routes: Routes = [
-  { path: 'pedidos-list', component: PedidosListComponent },
-  { path: 'pedidos-form/:status/:id', component: PedidosFormComponent },
-  { path: 'pedidos-form/:status', component: PedidosFormComponent },
-  { path: 'pedidos-form', component: PedidosFormComponent}
+  {path: 'pedidos', component: LayoutComponent, children: [
+    { path: 'list', component: PedidosListComponent },
+    { path: 'form/:status/:id', component: PedidosFormComponent },
+    { path: 'form/:status', component: PedidosFormComponent },
+    { path: 'form', component: PedidosFormComponent}
+  ]}
 ];
 
 @NgModule({
