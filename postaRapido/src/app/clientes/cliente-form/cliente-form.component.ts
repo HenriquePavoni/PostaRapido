@@ -128,13 +128,13 @@ export class ClienteFormComponent implements OnInit {
   }
 
   voltaLista() {
-    this.router.navigate(['cliente-list'])
+    this.router.navigate(['clientes/list'])
   }
 
   enviaMensagens() {
 
     if (this.errors != null) {
-      this.router.navigate(['cliente-list'], {
+      this.router.navigate(['clientes/list'], {
         state: { mensagens: this.errors }
       });
     }
@@ -144,7 +144,7 @@ export class ClienteFormComponent implements OnInit {
     if (this.status === 'update') msg = 'Cliente atualizado com sucesso.';
     if (this.status === 'delete') msg = 'Cliente excluído com sucesso.';
 
-    this.router.navigate(['cliente-list'], {
+    this.router.navigate(['clientes/list'], {
       state: { mensagens: [msg] }
     });
   }

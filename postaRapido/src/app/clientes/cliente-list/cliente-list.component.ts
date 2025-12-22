@@ -38,6 +38,6 @@ export class ClienteListComponent implements OnInit {
   }
 
   novoCliente() {
-    this.router.navigate([`/cliente-form/create`])
+    this.router.navigate([`/clientes/form/create`])
   }
 }

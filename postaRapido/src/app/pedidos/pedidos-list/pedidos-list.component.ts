@@ -61,7 +61,7 @@ export class PedidosListComponent implements OnInit {
   }
 
   novoPedido() {
-    this.router.navigate(['/pedidos-form/create'])
+    this.router.navigate(['/pedidos/form/create'])
   }
 
 }
