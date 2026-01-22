@@ -6,11 +6,11 @@ import { CepService } from 'src/app/cep.service';
 import { Cep } from 'src/app/cep';
 
 @Component({
-  selector: 'app-cliente-form',
-  templateUrl: './cliente-form.component.html',
-  styleUrls: ['./cliente-form.component.css']
+  selector: 'app-form',
+  templateUrl: './form.component.html',
+  styleUrls: ['./form.component.css']
 })
-export class ClienteFormComponent implements OnInit {
+export class FormComponent implements OnInit {
 
   cliente: Cliente;
   success: boolean = false;
@@ -53,7 +53,7 @@ export class ClienteFormComponent implements OnInit {
     this.cepService.getBuscaCep(this.cliente.cep)
     .subscribe(response => {
       this.cep = response;
-      
+
       this.cliente.endereco = this.cep.logradouro;
       this.cliente.cidade = this.cep.localidade;
       this.cliente.estado = this.cep.uf;
@@ -128,13 +128,13 @@ export class ClienteFormComponent implements OnInit {
   }
 
   voltaLista() {
-    this.router.navigate(['cliente-list'])
+    this.router.navigate(['clientes/list'])
   }
 
   enviaMensagens() {
 
     if (this.errors != null) {
-      this.router.navigate(['cliente-list'], {
+      this.router.navigate(['clientes/list'], {
         state: { mensagens: this.errors }
       });
     }

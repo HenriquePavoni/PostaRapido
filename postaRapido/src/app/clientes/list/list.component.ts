@@ -5,14 +5,14 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-cliente-list',
-  templateUrl: './cliente-list.component.html',
-  styleUrls: ['./cliente-list.component.css']
+  selector: 'app-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.css']
 })
-export class ClienteListComponent implements OnInit {
+export class ListComponent implements OnInit {
 
   listaClientes: Cliente[] = [];
-  mensagens: String[] = [];
+  mensagens: string[] = [];
 
   constructor(
     private service: ClientesService,
@@ -30,7 +30,7 @@ export class ClienteListComponent implements OnInit {
     const state = window.history.state;
     if (state && state.mensagens) {
       this.mensagens = Array.isArray(state.mensagens) ? state.mensagens : [state.mensagens];
-      
+
       setTimeout(() => {
         this.mensagens = null;
       }, 3000);
@@ -38,6 +38,6 @@ export class ClienteListComponent implements OnInit {
   }
 
   novoCliente() {
-    this.router.navigate([`/cliente-form/create`])
+    this.router.navigate([`/clientes/form/create`]);
   }
 }
