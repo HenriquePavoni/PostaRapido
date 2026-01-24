@@ -5,11 +5,11 @@ import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  selector: 'app-clientes-list',
+  templateUrl: './clientes-list.component.html',
+  styleUrls: ['./clientes-list.component.css']
 })
-export class ListComponent implements OnInit {
+export class ClientesListComponent implements OnInit {
 
   listaClientes: Cliente[] = [];
   mensagens: string[] = [];
@@ -38,6 +38,6 @@ export class ListComponent implements OnInit {
   }
 
   novoCliente() {
-    this.router.navigate([`/clientes/form/create`]);
+    this.router.navigate([`/clientes/clientes-form/create`]);
   }
 }

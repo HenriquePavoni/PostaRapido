@@ -5,6 +5,9 @@ import { PedidosFormComponent } from './pedidos-form/pedidos-form.component';
 
 
 const routes: Routes = [
+
+  { path: '', component: PedidosListComponent },
+
   { path: 'pedidos-list', component: PedidosListComponent },
   { path: 'pedidos-form/:status/:id', component: PedidosFormComponent },
   { path: 'pedidos-form/:status', component: PedidosFormComponent },

@@ -6,11 +6,11 @@ import { CepService } from 'src/app/cep.service';
 import { Cep } from 'src/app/cep';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'app-clientes-form',
+  templateUrl: './clientes-form.component.html',
+  styleUrls: ['./clientes-form.component.css']
 })
-export class FormComponent implements OnInit {
+export class ClientesFormComponent implements OnInit {
 
   cliente: Cliente;
   success: boolean = false;
@@ -128,13 +128,13 @@ export class FormComponent implements OnInit {
   }
 
   voltaLista() {
-    this.router.navigate(['clientes/list'])
+    this.router.navigate(['clientes/clientes-list']);
   }
 
   enviaMensagens() {
 
     if (this.errors != null) {
-      this.router.navigate(['clientes/list'], {
+      this.router.navigate(['clientes/clientes-list'], {
         state: { mensagens: this.errors }
       });
     }

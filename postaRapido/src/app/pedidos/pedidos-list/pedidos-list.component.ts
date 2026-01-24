@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { STATUS_PEDIDO } from '../enum';
 
 @Component({
-  selector: 'app-pedidos-list',
+  selector: 'app-pedidos-clientes-list',
   templateUrl: './pedidos-list.component.html',
   styleUrls: ['./pedidos-list.component.css']
 })
