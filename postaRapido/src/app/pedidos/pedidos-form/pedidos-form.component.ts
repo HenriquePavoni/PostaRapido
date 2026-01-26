@@ -7,7 +7,7 @@ import { Cliente } from 'src/app/clientes/cliente';
 import { STATUS_PEDIDO } from '../enum';
 
 @Component({
-  selector: 'app-pedidos-form',
+  selector: 'app-pedidos-clientes-form',
   templateUrl: './pedidos-form.component.html',
   styleUrls: ['./pedidos-form.component.css']
 })
@@ -34,10 +34,10 @@ export class PedidosFormComponent implements OnInit {
     let params: Params = this.activatedRoute.snapshot.params;
     this.id = params['id'];
     this.status = params['status'];
-  
+
     this.clienteService.getAllClientes().subscribe(clientes => {
       this.listaClientes = clientes;
-  
+
       if (this.id) {
         this.pedidoSerivce.getPedidoById(this.id).subscribe(response => {
           this.pedido = response;
@@ -48,7 +48,7 @@ export class PedidosFormComponent implements OnInit {
       }
     });
   }
-  
+
 
   onSubmit() {
     this.pedido.cliente = this.listaClientes.find(c => c.id == this.pedido.cliente.id);

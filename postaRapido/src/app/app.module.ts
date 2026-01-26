@@ -13,8 +13,9 @@ import { PedidoService } from './pedido.service';
 import { PedidosModule } from './pedidos/pedidos.module';
 import localePt from '@angular/common/locales/pt';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from "@angular/forms";
 import { LayoutComponent } from './layout/layout.component';
+import {AuthService} from "./auth.service";
 
 registerLocaleData(localePt);
 
@@ -26,17 +27,18 @@ registerLocaleData(localePt);
     LayoutComponent
   ],
   imports: [
-    FormsModule,
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
     TemplateModule,
     ClientesModule,
-    PedidosModule
+    PedidosModule,
+    FormsModule
   ],
   providers: [
     ClientesService,
     PedidoService,
+    AuthService,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ],
