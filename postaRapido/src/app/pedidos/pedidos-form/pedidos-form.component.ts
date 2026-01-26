@@ -120,13 +120,13 @@ export class PedidosFormComponent implements OnInit {
   }
 
   voltarLista() {
-    this.router.navigate(['pedidos-list'])
+    this.router.navigate(['pedidos/list'])
   }
 
   enviaMensagens() {
 
     if (this.errors != null) {
-      this.router.navigate(['cliente-list'], {
+      this.router.navigate(['cliente/list'], {
         state: { mensagens: this.errors }
       });
     }
@@ -136,7 +136,7 @@ export class PedidosFormComponent implements OnInit {
     if (this.status === 'update') msg = 'Pedido atualizado com sucesso.';
     if (this.status === 'delete') msg = 'Pedido excluído com sucesso.';
 
-    this.router.navigate(['pedidos-list'], {
+    this.router.navigate(['pedidos/list'], {
       state: { mensagens: [msg] }
     });
   }
