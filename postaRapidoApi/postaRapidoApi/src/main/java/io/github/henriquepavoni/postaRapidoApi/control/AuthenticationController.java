@@ -1,6 +1,7 @@
 package io.github.henriquepavoni.postaRapidoApi.control;
 
 import io.github.henriquepavoni.postaRapidoApi.config.TokenService;
+import io.github.henriquepavoni.postaRapidoApi.enums.UserRole;
 import io.github.henriquepavoni.postaRapidoApi.model.AutenticacaoUsuarioDTO;
 import io.github.henriquepavoni.postaRapidoApi.model.LoginResponseDTO;
 import io.github.henriquepavoni.postaRapidoApi.model.RegistroUsuarioDTO;
@@ -49,7 +50,7 @@ public class AuthenticationController {
     Usuario novoUsuario = Usuario.builder().
       username(data.username())
       .password(encryptedPassword)
-      .role(data.role())
+      .role(UserRole.USER)
       .build();
 
     return usuarioRepository.save(novoUsuario);
