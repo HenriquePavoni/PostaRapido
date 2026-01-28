@@ -3,11 +3,10 @@ package io.github.henriquepavoni.postaRapidoApi.control;
 import io.github.henriquepavoni.postaRapidoApi.model.Cliente;
 import io.github.henriquepavoni.postaRapidoApi.model.ClienteDTO;
 import io.github.henriquepavoni.postaRapidoApi.repository.ClienteRepository;
-import io.github.henriquepavoni.postaRapidoApi.service.ServiceCliente;
+import io.github.henriquepavoni.postaRapidoApi.service.ClienteService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -18,10 +17,10 @@ import java.util.List;
 public class ClienteController {
 
     private final ClienteRepository repository;
-    private final ServiceCliente service;
+    private final ClienteService service;
 
     @Autowired
-    public ClienteController(ClienteRepository repository, ServiceCliente service) {
+    public ClienteController(ClienteRepository repository, ClienteService service) {
         this.repository = repository;
         this.service = service;
     }

@@ -8,7 +8,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
-public class ServiceCep {
+public class CepService {
 
   public CepDTO buscaCep(String cep) {
 
