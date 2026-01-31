@@ -20,6 +20,9 @@ public class SecurityConfigurations {
   @Autowired
   SecurityFilter securityFilter;
 
+  @Autowired
+  AuthEntryPoint authEntryPoint;
+
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
     return  httpSecurity
@@ -29,6 +32,9 @@ public class SecurityConfigurations {
         .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
         .requestMatchers(HttpMethod.POST, "/api/auth/register").permitAll()
         .anyRequest().authenticated()
+      )
+      .exceptionHandling(exception -> exception
+        .authenticationEntryPoint(authEntryPoint)
       )
       .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
       .build();
