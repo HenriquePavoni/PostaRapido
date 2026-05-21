@@ -21,5 +21,14 @@ CREATE TABLE pedido (
     detalhes TEXT,
     valor DECIMAL(10, 2) NOT NULL,
 
-    FOREIGN KEY (id_cliente) REFERENCES cliente(id)
+    CONSTRAINT id_cliente_pedido_key FOREIGN KEY (id_cliente) REFERENCES cliente(id)
+);
+
+CREATE TABLE usuario (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(100) NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  role VARCHAR(25) NOT NULL,
+
+  CONSTRAINT username_unique_key UNIQUE (username)
 );

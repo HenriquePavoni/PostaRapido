@@ -9,13 +9,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.server.ResponseStatusException;
 
 @org.springframework.stereotype.Service
-public class ServiceCliente {
+public class ClienteService {
 
     private final ClienteRepository clienteRepository;
     private final PedidoRepository pedidoRepository;
 
     @Autowired
-    public ServiceCliente(ClienteRepository clienteRepository, PedidoRepository pedidoRepository) {
+    public ClienteService(ClienteRepository clienteRepository, PedidoRepository pedidoRepository) {
         this.clienteRepository = clienteRepository;
         this.pedidoRepository = pedidoRepository;
     }
