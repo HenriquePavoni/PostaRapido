@@ -7,7 +7,7 @@ import { STATUS_PEDIDO } from '../enum';
 @Component({
   selector: 'app-pedidos-clientes-list',
   templateUrl: './pedidos-list.component.html',
-  styleUrls: ['./pedidos-list.component.css']
+  styleUrls: ['../pedidos-page.css']
 })
 export class PedidosListComponent implements OnInit {
 
@@ -61,7 +61,7 @@ export class PedidosListComponent implements OnInit {
   }
 
   novoPedido() {
-    this.router.navigate(['/pedidos/form/create'])
+    this.router.navigate(['/pedidos/pedidos-form'])
   }
 
 }

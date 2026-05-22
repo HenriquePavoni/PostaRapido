@@ -1,0 +1,312 @@
+/* Estilos das telas de clientes — encapsulados no componente (:host) */
+:host {
+  display: block;
+  padding: 1rem 0 2rem;
+  --c-navy: #1a2234;
+  --c-navy-mid: #243b55;
+  --c-orange: #e67e22;
+  --c-orange-dark: #d35400;
+  --c-border: #e2e8f0;
+  --c-muted: #64748b;
+  --c-text: #334155;
+}
+
+:host .clientes-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+:host .clientes-page__eyebrow {
+  margin: 0 0 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c-orange);
+}
+
+:host .clientes-page__title {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--c-navy);
+}
+
+:host .clientes-page__subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--c-muted);
+  font-size: 0.92rem;
+}
+
+:host .clientes-card {
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1.15rem;
+  box-shadow: 0 4px 16px rgba(26, 34, 52, 0.05);
+}
+
+:host .clientes-card__title {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--c-navy);
+}
+
+:host .clientes-card__title i {
+  margin-right: 0.35rem;
+  color: var(--c-orange);
+}
+
+:host .clientes-filters .form-group {
+  margin-bottom: 0;
+}
+
+:host .clientes-filters label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--c-text);
+  margin-bottom: 0.3rem;
+}
+
+:host .clientes-filters .form-control,
+:host .clientes-filters select.form-control {
+  border-radius: 10px;
+  border: 1px solid var(--c-border);
+  font-size: 0.9rem;
+}
+
+:host .clientes-filters .form-control:focus,
+:host .clientes-filters select:focus {
+  border-color: var(--c-orange);
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
+}
+
+:host button.clientes-btn,
+:host a.clientes-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+:host button.clientes-btn:hover,
+:host a.clientes-btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+:host button.clientes-btn.clientes-btn--primary,
+:host a.clientes-btn.clientes-btn--primary {
+  background: linear-gradient(135deg, var(--c-orange), var(--c-orange-dark));
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(211, 84, 0, 0.25);
+}
+
+:host button.clientes-btn.clientes-btn--secondary {
+  background: #fff;
+  color: var(--c-navy-mid);
+  border: 1px solid var(--c-border);
+}
+
+:host button.clientes-btn.clientes-btn--success {
+  background: #16a34a;
+  color: #fff;
+}
+
+:host button.clientes-btn.clientes-btn--danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+:host button.clientes-btn.clientes-btn--search {
+  width: 100%;
+  background: var(--c-navy-mid);
+  color: #fff;
+}
+
+:host button.clientes-btn.clientes-btn--search:hover {
+  background: var(--c-navy);
+}
+
+:host button.clientes-btn.clientes-btn--icon,
+:host a.clientes-btn.clientes-btn--icon {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 8px;
+}
+
+:host a.clientes-btn.clientes-btn--edit {
+  background: rgba(36, 59, 85, 0.08);
+  color: var(--c-navy-mid);
+  border: 1px solid var(--c-border);
+}
+
+:host a.clientes-btn.clientes-btn--edit:hover {
+  background: var(--c-navy-mid);
+  color: #fff;
+}
+
+:host a.clientes-btn.clientes-btn--delete {
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+:host a.clientes-btn.clientes-btn--delete:hover {
+  background: #dc2626;
+  color: #fff;
+}
+
+:host .clientes-alert {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.85rem;
+  font-size: 0.88rem;
+}
+
+:host .clientes-alert--success {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+:host .clientes-alert--warning {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+:host .clientes-alert--danger {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+:host .clientes-table-wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--c-border);
+}
+
+:host table.clientes-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  background: #fff;
+}
+
+:host table.clientes-table thead {
+  background: linear-gradient(135deg, var(--c-navy), var(--c-navy-mid));
+  color: #fff;
+}
+
+:host table.clientes-table thead th {
+  padding: 0.75rem 0.65rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: none;
+  font-size: 0.78rem;
+  color: #fff;
+  background: transparent;
+  vertical-align: middle;
+}
+
+:host table.clientes-table tbody td {
+  padding: 0.7rem 0.65rem;
+  border-bottom: 1px solid #f1f5f9;
+  border-top: none;
+  color: var(--c-text);
+  vertical-align: middle;
+}
+
+:host table.clientes-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+:host .clientes-table__actions {
+  display: flex;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+:host .clientes-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+:host .clientes-badge--active {
+  background: #dcfce7;
+  color: #166534;
+}
+
+:host .clientes-badge--inactive {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+:host .clientes-form .form-group label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--c-text);
+}
+
+:host .clientes-form .form-control {
+  border-radius: 10px;
+  border: 1px solid var(--c-border);
+}
+
+:host .clientes-form .form-control:focus {
+  border-color: var(--c-orange);
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.12);
+}
+
+:host .clientes-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-top: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+:host .clientes-form__hint {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  color: var(--c-muted);
+}
+
+:host .clientes-form__hint i {
+  color: var(--c-orange);
+  margin-right: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  :host .clientes-page__header {
+    flex-direction: column;
+  }
+
+  :host button.clientes-btn.clientes-btn--primary {
+    width: 100%;
+  }
+}

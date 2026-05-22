@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ClientesRoutingModule } from './clientes-routing.module';
 import { ClientesFormComponent } from './clientes-form/clientes-form.component';
 import { ClientesListComponent } from './clientes-list/clientes-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { ClientesListComponent } from './clientes-list/clientes-list.component';
   imports: [
     CommonModule,
     ClientesRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports: [
     ClientesFormComponent,

@@ -9,7 +9,7 @@ import { STATUS_PEDIDO } from '../enum';
 @Component({
   selector: 'app-pedidos-clientes-form',
   templateUrl: './pedidos-form.component.html',
-  styleUrls: ['./pedidos-form.component.css']
+  styleUrls: ['../pedidos-page.css']
 })
 export class PedidosFormComponent implements OnInit {
 

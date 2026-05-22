@@ -5,6 +5,7 @@ import { PedidosRoutingModule } from './pedidos-routing.module';
 import { PedidosListComponent } from './pedidos-list/pedidos-list.component';
 import { PedidosFormComponent } from './pedidos-form/pedidos-form.component';
 import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     PedidosRoutingModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ],
   exports: [
     PedidosFormComponent,

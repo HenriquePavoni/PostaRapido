@@ -30,6 +30,14 @@ public class ClienteController {
       return repository.findAll();
     }
 
+    @GetMapping("/filtro")
+    public List<Cliente> buscaClientesFiltro(
+        @RequestParam(value = "nomeCliente", required = false, defaultValue = "") String nomeCliente,
+        @RequestParam(value = "statusPedido", required = false, defaultValue = "") String statusPedido
+    ) {
+        return repository.findByNomeClienteOrStatus("%"+nomeCliente+"%", statusPedido);
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente save(@RequestBody @Valid ClienteDTO dto) {

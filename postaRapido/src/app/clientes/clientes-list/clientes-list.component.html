@@ -1,66 +1,104 @@
-<h1 class="mt-4">Clientes</h1>
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active fw-bold">Gerenciamento de Clientes</li>
-</ol>
-<div class="row justify-content-end">
-    <div class="col-md-2">
-        <button class="btn btn-warning" (click)="novoCliente()">
-            <i class="fa fa-plus"></i>
-            Novo Cliente
-        </button>
+<div class="clientes-page">
+  <header class="clientes-page__header">
+    <div>
+      <p class="clientes-page__eyebrow">Cadastros</p>
+      <h1 class="clientes-page__title">Clientes</h1>
+      <p class="clientes-page__subtitle">Gerenciamento de clientes</p>
     </div>
-</div>
-<br />
-<div class="container-fluid px-5">
-    <div class="row">
-        <div class="alert alert-success" role="alert" *ngFor="let mensagem of mensagens">
-            {{ mensagem }}
+    <button type="button" class="clientes-btn clientes-btn--primary" (click)="novoCliente()">
+      <i class="fa fa-plus"></i> Novo Cliente
+    </button>
+  </header>
+
+  <div class="clientes-card">
+    <h2 class="clientes-card__title"><i class="fas fa-filter"></i> Filtros</h2>
+    <form #buscaClienteForm="ngForm" (ngSubmit)="buscar()" class="clientes-filters">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="filtroNomeCliente">Nome Cliente:</label>
+            <input type="text" id="filtroNomeCliente" name="filtroNomeCliente" [(ngModel)]="filtroNomeCliente"
+              class="form-control">
+          </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th class="fw-bold">ID</th>
-                        <th class="fw-bold">Nome</th>
-                        <th class="fw-bold">Email</th>
-                        <th class="fw-bold">Telefone</th>
-                        <th class="fw-bold">CPF</th>
-                        <th class="fw-bold">Data Nascimento</th>
-                        <th class="fw-bold">Cidade</th>
-                        <th class="fw-bold">Estado</th>
-                        <th class="fw-bold">CEP</th>
-                        <th class="fw-bold">Data Cadastro</th>
-                        <th class="fw-bold">Ativo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let cliente of listaClientes">
-                        <td>{{ cliente.id }}</td>
-                        <td>{{ cliente.nome }}</td>
-                        <td>{{ cliente.email }}</td>
-                        <td>{{ cliente.telefone }}</td>
-                        <td>{{ cliente.cpf }}</td>
-                        <td>{{ cliente.dataNascimento }}</td>
-                        <td>{{ cliente.cidade }}</td>
-                        <td>{{ cliente.estado }}</td>
-                        <td>{{ cliente.cep}}</td>
-                        <td>{{ cliente.dataCadastro }}</td>
-                        <td>{{ cliente.ativo ? 'Ativo' : 'Desativado' }}</td>
-                        <td>
-                            <button class="btn btn-primary" routerLink="/clientes/form/update/{{ cliente.id }}">
-                                <i class="fa fa-solid fa-pen"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" routerLink="/clientes/form/delete/{{ cliente.id }}">
-                                <i class="fa fa-solid fa-eraser"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="filtroStatusPedido">Status Cliente:</label>
+            <select [(ngModel)]="filtroStatusPedido" name="filtroStatusPedido" class="form-control">
+              <option value="">Selecione...</option>
+              <option *ngFor="let status of statusPedidoList" [ngValue]="status.descricao">
+                {{ status.descricao }}
+              </option>
+            </select>
+          </div>
         </div>
+        <div class="col-md-3 d-flex align-items-end">
+          <div class="form-group w-100">
+            <button type="submit" class="clientes-btn clientes-btn--search w-100">
+              <i class="fa fa-search"></i> Pesquisar
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="clientes-alert clientes-alert--success" role="alert" *ngFor="let mensagem of mensagens">
+    {{ mensagem }}
+  </div>
+  <div class="clientes-alert clientes-alert--warning" role="alert" *ngIf="mensagemTabela">
+    {{ mensagemTabela }}
+  </div>
+
+  <div class="clientes-card">
+    <div class="clientes-table-wrap">
+      <table class="clientes-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>CPF</th>
+            <th>Nascimento</th>
+            <th>Cidade</th>
+            <th>UF</th>
+            <th>CEP</th>
+            <th>Cadastro</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cliente of listaClientes">
+            <td>{{ cliente.id }}</td>
+            <td><strong>{{ cliente.nome }}</strong></td>
+            <td>{{ cliente.email }}</td>
+            <td>{{ cliente.telefone }}</td>
+            <td>{{ cliente.cpf }}</td>
+            <td>{{ cliente.dataNascimento }}</td>
+            <td>{{ cliente.cidade }}</td>
+            <td>{{ cliente.estado }}</td>
+            <td>{{ cliente.cep }}</td>
+            <td>{{ cliente.dataCadastro }}</td>
+            <td>
+              <span class="clientes-badge" [ngClass]="cliente.ativo ? 'clientes-badge--active' : 'clientes-badge--inactive'">
+                {{ cliente.ativo ? 'Ativo' : 'Desativado' }}
+              </span>
+            </td>
+            <td>
+              <div class="clientes-table__actions">
+                <a class="clientes-btn clientes-btn--icon clientes-btn--edit" routerLink="/clientes/form/update/{{ cliente.id }}">
+                  <i class="fa fa-solid fa-pen"></i>
+                </a>
+                <a class="clientes-btn clientes-btn--icon clientes-btn--delete" routerLink="/clientes/form/delete/{{ cliente.id }}">
+                  <i class="fa fa-solid fa-eraser"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>

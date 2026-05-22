@@ -8,7 +8,7 @@ import { Cep } from 'src/app/cep';
 @Component({
   selector: 'app-clientes-form',
   templateUrl: './clientes-form.component.html',
-  styleUrls: ['./clientes-form.component.css']
+  styleUrls: ['../clientes-page.css']
 })
 export class ClientesFormComponent implements OnInit {
 

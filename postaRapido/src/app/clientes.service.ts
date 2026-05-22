@@ -1,5 +1,5 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Cliente } from './clientes/cliente';
 
@@ -16,6 +16,24 @@ export class ClientesService {
 
   getAllClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>('http://localhost:8080/api/clientes');
+  }
+
+  getAllClientesFilter(nomeCliente: string, statusPedido: string): Observable<Cliente[]> {
+
+    if(nomeCliente == null) {
+      nomeCliente = "";
+    }
+
+    if(statusPedido == null) {
+      statusPedido = "";
+    }
+
+    const httpParams = new HttpParams()
+      .set("nomeCliente", nomeCliente)
+      .set("statusPedido", statusPedido);
+
+    const url = 'http://localhost:8080/api/clientes/filtro?' + httpParams;
+    return this.http.get<any>(url);
   }
 
   getClienteById(id: number): Observable<Cliente> {

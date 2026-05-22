@@ -1,6 +1,11 @@
 <nav class="sb-topnav navbar navbar-expand">
     <a class="navbar-brand" routerLink="/home">Posta Rápido</a>
-    <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#">
+    <button
+      type="button"
+      class="btn btn-link btn-sm order-1 order-lg-0"
+      id="sidebarToggle"
+      aria-label="Abrir ou fechar menu lateral"
+      (click)="toggleSidebar($event)">
         <i id="item-icon" class="fas fa-bars fs-3"></i>
     </button>            
 </nav>

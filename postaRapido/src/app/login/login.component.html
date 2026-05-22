@@ -1,62 +1,117 @@
-<div id="layoutAuthentication">
-  <div id="layoutAuthentication_content">
-    <main>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-5">
-            <div class="card shadow-lg border-0 rounded-lg mt-5">
-              <div class="card-header">
-                <h3 class="text-center font-weight-light my-4">
-                  {{ cadastrando ? 'Cadastro de Novo Usuário' : 'Entrar'}}
-                </h3>
-              </div>
-              <div class="card-body">
-                <div class="alert alert-danger" *ngIf="mensagemErro">
-                  {{ mensagemErro }}
-                </div>
-                <div class="alert alert-success" *ngIf="mensagemSucesso">
-                  {{ mensagemSucesso }}
-                </div>
-                <form #loginForm="ngForm" (submit)="onSubmit();">
-                  <div class="form-group">
-                    <label class="small mb-1">Login</label>
-                    <input type="text" name="username" [(ngModel)]="username"
-                           class="form-control py-4" placeholder="Digite seu login">
-                  </div>
+<div class="auth-page">
+  <section class="auth-brand" aria-hidden="false">
+    <div class="auth-brand__content">
+      <div class="auth-brand__logo">
+        <i class="fas fa-shipping-fast" aria-hidden="true"></i>
+        <span>Posta<strong>Rápido</strong></span>
+      </div>
+      <h1 class="auth-brand__title">Entregas rápidas, seguras e no seu controle.</h1>
+      <p class="auth-brand__subtitle">
+        Gerencie clientes, pedidos e acompanhe cada etapa da operação em um só lugar.
+      </p>
+      <ul class="auth-brand__features">
+        <li><i class="fas fa-check-circle"></i> Rastreamento em tempo real</li>
+        <li><i class="fas fa-check-circle"></i> Cadastro simplificado de pedidos</li>
+        <li><i class="fas fa-check-circle"></i> Painel intuitivo para sua equipe</li>
+      </ul>
+    </div>
+    <div class="auth-brand__pattern"></div>
+  </section>
 
-                  <div class="form-group">
-                    <label class="small mb-1">Senha</label>
-                    <input type="password" name="password" [(ngModel)]="password"
-                           class="form-control py-4" placeholder="Digite sua senha">
-                  </div>
+  <section class="auth-form-section">
+    <div class="auth-card">
+      <header class="auth-card__header">
+        <p class="auth-card__eyebrow">{{ cadastrando ? 'Novo acesso' : 'Bem-vindo de volta' }}</p>
+        <h2>{{ cadastrando ? 'Criar conta' : 'Entrar na plataforma' }}</h2>
+        <p class="auth-card__hint">
+          {{ cadastrando ? 'Preencha os dados para começar a usar o sistema.' : 'Use seu login e senha para continuar.' }}
+        </p>
+      </header>
 
-                  <div class="form-group align-items-center justify-content-between mt-4 mb-0">
-                    <button type="submit" class="btn btn-primary" *ngIf="!cadastrando">
-                      Enviar
-                    </button>
+      <div class="auth-alert auth-alert--error" *ngIf="mensagemErro" role="alert">
+        <i class="fas fa-exclamation-circle"></i>
+        <span>{{ mensagemErro }}</span>
+      </div>
+      <div class="auth-alert auth-alert--success" *ngIf="mensagemSucesso" role="alert">
+        <i class="fas fa-check-circle"></i>
+        <span>{{ mensagemSucesso }}</span>
+      </div>
 
-                    <button type="button" (click)="cadastrar()" class="btn btn-success" *ngIf="cadastrando">
-                      Cadastrar
-                    </button>
-
-                    <button type="button" (click)="cancelaCadastro()" class="btn btn-danger ml-1" *ngIf="cadastrando" >
-                      Cancelar
-                    </button>
-                  </div>
-                </form>
-              </div>
-
-              <div class="card-footer text-center">
-                <div class="small">
-                  <a href="#" (click)="preparaCadastrar($event)">
-                    Não Possui Usuário ? Cadastre-se!
-                  </a>
-                </div>
-              </div>
-            </div>
+      <form #loginForm="ngForm" (ngSubmit)="cadastrando ? cadastrar() : onSubmit()" novalidate>
+        <div class="auth-field">
+          <label for="username">Usuário</label>
+          <div class="auth-field__control">
+            <i class="fas fa-user auth-field__icon" aria-hidden="true"></i>
+            <input
+              id="username"
+              type="text"
+              name="username"
+              [(ngModel)]="username"
+              required
+              autocomplete="username"
+              placeholder="Digite seu usuário"
+              [disabled]="loading">
           </div>
         </div>
-      </div>
-    </main>
-  </div>
+
+        <div class="auth-field">
+          <label for="password">Senha</label>
+          <div class="auth-field__control">
+            <i class="fas fa-lock auth-field__icon" aria-hidden="true"></i>
+            <input
+              id="password"
+              [type]="showPassword ? 'text' : 'password'"
+              name="password"
+              [(ngModel)]="password"
+              required
+              [attr.autocomplete]="cadastrando ? 'new-password' : 'current-password'"
+              placeholder="Digite sua senha"
+              [disabled]="loading">
+            <button
+              type="button"
+              class="auth-field__toggle"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="showPassword ? 'Ocultar senha' : 'Mostrar senha'"
+              [disabled]="loading">
+              <i class="fas" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="auth-actions">
+          <button
+            type="submit"
+            class="auth-btn auth-btn--primary"
+            [disabled]="loading || !loginForm.form.valid">
+            <span *ngIf="!loading">{{ cadastrando ? 'Criar conta' : 'Entrar' }}</span>
+            <span *ngIf="loading" class="auth-btn__loading">
+              <i class="fas fa-circle-notch fa-spin"></i> Aguarde...
+            </span>
+          </button>
+
+          <button
+            type="button"
+            class="auth-btn auth-btn--ghost"
+            *ngIf="cadastrando"
+            (click)="cancelaCadastro()"
+            [disabled]="loading">
+            Voltar ao login
+          </button>
+        </div>
+      </form>
+
+      <footer class="auth-card__footer">
+        <p *ngIf="!cadastrando">
+          Ainda não tem conta?
+          <button type="button" class="auth-link" (click)="preparaCadastrar($event)">Cadastre-se gratuitamente</button>
+        </p>
+        <p *ngIf="cadastrando">
+          Já possui acesso?
+          <button type="button" class="auth-link" (click)="cancelaCadastro()">Fazer login</button>
+        </p>
+      </footer>
+    </div>
+
+    <p class="auth-form-section__copy">&copy; {{ currentYear }} PostaRapido</p>
+  </section>
 </div>
