@@ -11,6 +11,7 @@ export class CepService {
   constructor(private http: HttpClient) { }
 
     getBuscaCep(cep: string): Observable<Cep> {
-      return this.http.get<Cep>(`http://localhost:8080/api/cep/${cep}`);
+      const cepLimpo = (cep || '').replace(/\D/g, '');
+      return this.http.get<Cep>(`http://localhost:8080/api/cep/${cepLimpo}`);
     }
 }
