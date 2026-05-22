@@ -1,0 +1,307 @@
+/* Estilos das telas de pedidos — encapsulados no componente (:host) */
+:host {
+  display: block;
+  padding: 1rem 0 2rem;
+  --p-navy: #1a2234;
+  --p-navy-mid: #243b55;
+  --p-orange: #e67e22;
+  --p-orange-dark: #d35400;
+  --p-border: #e2e8f0;
+  --p-muted: #64748b;
+  --p-text: #334155;
+}
+
+:host .pedidos-page__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+
+:host .pedidos-page__eyebrow {
+  margin: 0 0 0.3rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--p-orange);
+}
+
+:host .pedidos-page__title {
+  margin: 0;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: var(--p-navy);
+}
+
+:host .pedidos-page__subtitle {
+  margin: 0.25rem 0 0;
+  color: var(--p-muted);
+  font-size: 0.92rem;
+}
+
+:host .pedidos-card {
+  background: #fff;
+  border: 1px solid var(--p-border);
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem;
+  margin-bottom: 1.15rem;
+  box-shadow: 0 4px 16px rgba(26, 34, 52, 0.05);
+}
+
+:host .pedidos-card__title {
+  margin: 0 0 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--p-navy);
+}
+
+:host .pedidos-card__title i {
+  margin-right: 0.35rem;
+  color: var(--p-orange);
+}
+
+:host .pedidos-filters .form-group {
+  margin-bottom: 0;
+}
+
+:host .pedidos-filters label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--p-text);
+  margin-bottom: 0.3rem;
+}
+
+:host .pedidos-filters .form-control,
+:host .pedidos-filters select.form-control {
+  border-radius: 10px;
+  border: 1px solid var(--p-border);
+  font-size: 0.9rem;
+}
+
+:host .pedidos-filters .form-control:focus,
+:host .pedidos-filters select:focus {
+  border-color: var(--p-orange);
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.15);
+}
+
+:host button.pedidos-btn,
+:host a.pedidos-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+:host button.pedidos-btn:hover,
+:host a.pedidos-btn:hover {
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+:host button.pedidos-btn.pedidos-btn--primary,
+:host a.pedidos-btn.pedidos-btn--primary {
+  background: linear-gradient(135deg, var(--p-orange), var(--p-orange-dark));
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(211, 84, 0, 0.25);
+}
+
+:host button.pedidos-btn.pedidos-btn--secondary {
+  background: #fff;
+  color: var(--p-navy-mid);
+  border: 1px solid var(--p-border);
+}
+
+:host button.pedidos-btn.pedidos-btn--success {
+  background: #16a34a;
+  color: #fff;
+}
+
+:host button.pedidos-btn.pedidos-btn--danger {
+  background: #dc2626;
+  color: #fff;
+}
+
+:host button.pedidos-btn.pedidos-btn--search {
+  width: 100%;
+  background: var(--p-navy-mid);
+  color: #fff;
+}
+
+:host button.pedidos-btn.pedidos-btn--search:hover {
+  background: var(--p-navy);
+}
+
+:host button.pedidos-btn.pedidos-btn--icon,
+:host a.pedidos-btn.pedidos-btn--icon {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 8px;
+}
+
+:host a.pedidos-btn.pedidos-btn--edit {
+  background: rgba(36, 59, 85, 0.08);
+  color: var(--p-navy-mid);
+  border: 1px solid var(--p-border);
+}
+
+:host a.pedidos-btn.pedidos-btn--edit:hover {
+  background: var(--p-navy-mid);
+  color: #fff;
+}
+
+:host a.pedidos-btn.pedidos-btn--delete {
+  background: rgba(220, 38, 38, 0.08);
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+:host a.pedidos-btn.pedidos-btn--delete:hover {
+  background: #dc2626;
+  color: #fff;
+}
+
+:host .pedidos-alert {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  margin-bottom: 0.85rem;
+  font-size: 0.88rem;
+}
+
+:host .pedidos-alert--success {
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1px solid #bbf7d0;
+}
+
+:host .pedidos-alert--warning {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+:host .pedidos-alert--danger {
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+}
+
+:host .pedidos-table-wrap {
+  overflow-x: auto;
+  border-radius: 10px;
+  border: 1px solid var(--p-border);
+}
+
+:host table.pedidos-table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  background: #fff;
+}
+
+:host table.pedidos-table thead {
+  background: linear-gradient(135deg, var(--p-navy), var(--p-navy-mid));
+  color: #fff;
+}
+
+:host table.pedidos-table thead th {
+  padding: 0.75rem 0.65rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border: none;
+  font-size: 0.78rem;
+  color: #fff;
+  background: transparent;
+  vertical-align: middle;
+}
+
+:host table.pedidos-table tbody td {
+  padding: 0.7rem 0.65rem;
+  border-bottom: 1px solid #f1f5f9;
+  border-top: none;
+  color: var(--p-text);
+  vertical-align: middle;
+}
+
+:host table.pedidos-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+:host .pedidos-table__actions {
+  display: flex;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+:host .pedidos-badge {
+  display: inline-block;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+:host .pedidos-form .form-group label {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--p-text);
+}
+
+:host .pedidos-form .form-control,
+:host .pedidos-form select.form-control {
+  border-radius: 10px;
+  border: 1px solid var(--p-border);
+}
+
+:host .pedidos-form .form-control:focus,
+:host .pedidos-form select:focus {
+  border-color: var(--p-orange);
+  box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.12);
+}
+
+:host .pedidos-form__valor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+:host .pedidos-form__valor-prefix {
+  font-weight: 600;
+  color: var(--p-muted);
+  white-space: nowrap;
+}
+
+:host .pedidos-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  padding-top: 0.5rem;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 768px) {
+  :host .pedidos-page__header {
+    flex-direction: column;
+  }
+
+  :host button.pedidos-btn.pedidos-btn--primary {
+    width: 100%;
+  }
+}

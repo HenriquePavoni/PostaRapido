@@ -1,87 +1,94 @@
-<h1 class="mt-4">Pedidos</h1>
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active fw-bold">Gerenciamento de Pedidos</li>
-</ol>
-<div class="container">
-    <form #PedidoForm="ngForm" (ngSubmit)="onSubmit()">
+<div class="pedidos-page">
+  <header class="pedidos-page__header">
+    <div>
+      <p class="pedidos-page__eyebrow">Operações</p>
+      <h1 class="pedidos-page__title">Pedidos</h1>
+      <p class="pedidos-page__subtitle">Gerenciamento de pedidos</p>
+    </div>
+  </header>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger" role="alert" *ngFor="let error of errors">
-                    {{ error }}
-                </div>
-            </div>
+  <form #PedidoForm="ngForm" (ngSubmit)="onSubmit()" class="pedidos-form">
+    <div class="pedidos-alert pedidos-alert--danger" role="alert" *ngFor="let error of errors">
+      {{ error }}
+    </div>
+
+    <div class="pedidos-card">
+      <h2 class="pedidos-card__title"><i class="fas fa-clipboard-list"></i> Dados do pedido</h2>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label>Data Pedido:</label>
+            <input type="text" name="dataPedido" [(ngModel)]="pedido.dataPedido" appMask="date" class="form-control"
+              [disabled]="id" placeholder="dd/mm/aaaa" />
+          </div>
         </div>
-        
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label>Data Pedido:</label>
-                    <input type="text" name="dataPedido" [(ngModel)]="pedido.dataPedido" class="form-control"
-                        [disabled]="id" placeholder="10/10/2010" />
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="form-group">
-                    <label>Cliente:</label>
-                    <select class="form-select" name="cliente" id="cliente" [(ngModel)]="pedido.cliente"
-                        [disabled]="status === 'delete'">
-                        <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">
-                            {{ cliente.nome }}
-                        </option>
-                    </select>
-                </div>
-            </div>
+        <div class="col-md-8">
+          <div class="form-group">
+            <label>Cliente:</label>
+            <select class="form-control" name="cliente" id="cliente" [(ngModel)]="pedido.cliente"
+              [disabled]="status === 'delete'">
+              <option *ngFor="let cliente of listaClientes" [ngValue]="cliente">
+                {{ cliente.nome }}
+              </option>
+            </select>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label>Detalhes:</label>
-                    <textarea rows="10" name="detalhes" [(ngModel)]="pedido.detalhes" class="form-control"
-                        placeholder="Detalhamento sobre o pedido" [disabled]="status === 'delete'">
-                        {{ pedido.detalhes }}
-                    </textarea>
-                </div>
-            </div>
+      </div>
+    </div>
+
+    <div class="pedidos-card">
+      <h2 class="pedidos-card__title"><i class="fas fa-align-left"></i> Detalhes</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label>Detalhes:</label>
+            <textarea rows="8" name="detalhes" [(ngModel)]="pedido.detalhes" class="form-control"
+              placeholder="Detalhamento sobre o pedido" [disabled]="status === 'delete'"></textarea>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <label>Valor:</label>
-                <div class="form-group d-flex align-items-center">
-                    <input type="text" name="valor" [(ngModel)]="pedido.valor" class="form-control" placeholder="29.90"
-                        [disabled]="status === 'delete'" />
-                    <span class="ml-2">R$</span>
-                </div>
+      </div>
+    </div>
+
+    <div class="pedidos-card">
+      <h2 class="pedidos-card__title"><i class="fas fa-dollar-sign"></i> Valor e status</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Valor:</label>
+            <div class="pedidos-form__valor">
+              <span class="pedidos-form__valor-prefix">R$</span>
+              <input type="text" name="valor" [(ngModel)]="pedido.valor" appMask="currency" class="form-control"
+                placeholder="0,00" [disabled]="status === 'delete'" />
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Status:</label>
-                    <select type="text" name="status" [(ngModel)]="pedido.status" class="form-select"
-                        [disabled]="status === 'delete'">
-                        <option *ngFor="let status of statusPedidoList" [ngValue]="status.codigo">
-                            {{ status.descricao }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10">
-                    <button type="button" class="btn btn-warning mr-2 w-25" (click)="voltarLista()">
-                        <i class="fas fa-solid fa-arrow-left"></i> Voltar
-                    </button>
-                    <button type="submit" class="btn btn-success mr-2 w-25"
-                        *ngIf="status != 'delete' && status != 'update'">
-                        <i class="fas fa-solid fa-plus"></i> Salvar
-                    </button>
-                    <button type="submit" class="btn btn-success mr-2 w-25" *ngIf="status == 'update'">
-                        <i class="fas fa-solid fa-plus"></i> Editar
-                    </button>
-                    <button type="submit" class="btn btn-danger mr-2 w-25" *ngIf="status == 'delete'">
-                        <i class="fas fa-solid fa-plus"></i> Deletar
-                    </button>
-                </div>
-            </div>
+          </div>
         </div>
-        <br>
-    </form>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label>Status:</label>
+            <select name="status" [(ngModel)]="pedido.status" class="form-control"
+              [disabled]="status === 'delete'">
+              <option *ngFor="let s of statusPedidoList" [ngValue]="s.codigo">
+                {{ s.descricao }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pedidos-form__actions">
+      <button type="button" class="pedidos-btn pedidos-btn--secondary" (click)="voltarLista()">
+        <i class="fas fa-solid fa-arrow-left"></i> Voltar
+      </button>
+      <button type="submit" class="pedidos-btn pedidos-btn--success" *ngIf="status != 'delete' && status != 'update'">
+        <i class="fas fa-solid fa-plus"></i> Salvar
+      </button>
+      <button type="submit" class="pedidos-btn pedidos-btn--primary" *ngIf="status == 'update'">
+        <i class="fas fa-solid fa-pen"></i> Editar
+      </button>
+      <button type="submit" class="pedidos-btn pedidos-btn--danger" *ngIf="status == 'delete'">
+        <i class="fas fa-solid fa-trash"></i> Deletar
+      </button>
+    </div>
+  </form>
 </div>

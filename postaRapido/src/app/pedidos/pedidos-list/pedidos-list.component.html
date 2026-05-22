@@ -1,91 +1,92 @@
-<h1 class="mt-4">Pedidos</h1>
-<ol class="breadcrumb mb-4">
-    <li class="breadcrumb-item active fw-bold">Gerenciamento de Pedidos</li>
-</ol>
-<form #buscaPedidoForm="ngForm" (ngSubmit)="buscar()">
-    <fieldset class="p-3 border rounded mb-4">
-        <legend class="w-auto px-2">Filtros</legend>
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label for="filtroNomeCliente">Nome Cliente:</label>
-                    <input type="text" id="filtroNomeCliente" name="filtroNomeCliente" [(ngModel)]="filtroNomeCliente" 
-                        class="form-control">
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="filtroStatusPedido">Status Pedido:</label>
-                    <select [(ngModel)]="filtroStatusPedido" name="filtroStatusPedido" class="form-select">
-                        <option value="">Selecione...</option>
-                        <option *ngFor="let status of statusPedidoList" [ngValue]="status.descricao">
-                            {{ status.descricao }}
-                        </option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3 d-flex align-items-end">
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary w-100">
-                        <i class="fa fa-search"></i> Pesquisar
-                    </button>
-                </div>
-            </div>
+<div class="pedidos-page">
+  <header class="pedidos-page__header">
+    <div>
+      <p class="pedidos-page__eyebrow">Operações</p>
+      <h1 class="pedidos-page__title">Pedidos</h1>
+      <p class="pedidos-page__subtitle">Gerenciamento de pedidos</p>
+    </div>
+    <button type="button" class="pedidos-btn pedidos-btn--primary" (click)="novoPedido()">
+      <i class="fa fa-plus"></i> Novo Pedido
+    </button>
+  </header>
+
+  <div class="pedidos-card">
+    <h2 class="pedidos-card__title"><i class="fas fa-filter"></i> Filtros</h2>
+    <form #buscaPedidoForm="ngForm" (ngSubmit)="buscar()" class="pedidos-filters">
+      <div class="row justify-content-center">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="filtroNomeCliente">Nome Cliente:</label>
+            <input type="text" id="filtroNomeCliente" name="filtroNomeCliente" [(ngModel)]="filtroNomeCliente"
+              class="form-control">
+          </div>
         </div>
-    </fieldset>
-</form>
-<div class="row justify-content-end">
-    <div class="col-md-2">
-        <button class="btn btn-warning" (click)="novoPedido()">
-            <i class="fa fa-plus"></i>
-            Novo Pedido
-        </button>
-    </div>
-</div>
-<br />
-<div class="container-fluid px-5">
-    <div class="alert alert-success" role="alert" *ngFor="let mensagem of mensagens">
-        {{ mensagem }}
-    </div>
-    <div class="row">
-        <div class="alert alert-warning" role="alert" *ngIf="mensagemTabela">
-            {{ mensagemTabela }}
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="filtroStatusPedido">Status Pedido:</label>
+            <select [(ngModel)]="filtroStatusPedido" name="filtroStatusPedido" class="form-control">
+              <option value="">Selecione...</option>
+              <option *ngFor="let status of statusPedidoList" [ngValue]="status.descricao">
+                {{ status.descricao }}
+              </option>
+            </select>
+          </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th class="fw-bold">ID</th>
-                        <th class="fw-bold">Cliente</th>
-                        <th class="fw-bold">Detalhes</th>
-                        <th class="fw-bold">Status</th>
-                        <th class="fw-bold">Valor</th>
-                        <th class="fw-bold">Data Pedido</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let pedido of listaPedidos">
-                        <td>{{ pedido.id }}</td>
-                        <td>{{ pedido.cliente.nome }}</td>
-                        <td>{{ pedido.detalhes }}</td>
-                        <td>{{ pedido.status }}</td>
-                        <td>{{ pedido.valor }}</td>
-                        <td>{{ pedido.dataPedido }}</td>
-                        <td>
-                            <button class="btn btn-primary" routerLink="/pedidos/form/update/{{ pedido.id }}">
-                                <i class="fa fa-solid fa-pen"></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger" routerLink="/pedidos/form/delete/{{ pedido.id }}">
-                                <i class="fa fa-solid fa-eraser"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-md-3 d-flex align-items-end">
+          <div class="form-group w-100">
+            <button type="submit" class="pedidos-btn pedidos-btn--search w-100">
+              <i class="fa fa-search"></i> Pesquisar
+            </button>
+          </div>
         </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="pedidos-alert pedidos-alert--success" role="alert" *ngFor="let mensagem of mensagens">
+    {{ mensagem }}
+  </div>
+  <div class="pedidos-alert pedidos-alert--warning" role="alert" *ngIf="mensagemTabela">
+    {{ mensagemTabela }}
+  </div>
+
+  <div class="pedidos-card">
+    <div class="pedidos-table-wrap">
+      <table class="pedidos-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Detalhes</th>
+            <th>Status</th>
+            <th>Valor</th>
+            <th>Data Pedido</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let pedido of listaPedidos">
+            <td>{{ pedido.id }}</td>
+            <td><strong>{{ pedido.cliente.nome }}</strong></td>
+            <td>{{ pedido.detalhes }}</td>
+            <td>
+              <span class="pedidos-badge">{{ pedido.status }}</span>
+            </td>
+            <td>{{ pedido.valor }}</td>
+            <td>{{ pedido.dataPedido }}</td>
+            <td>
+              <div class="pedidos-table__actions">
+                <a class="pedidos-btn pedidos-btn--icon pedidos-btn--edit" routerLink="/pedidos/form/update/{{ pedido.id }}">
+                  <i class="fa fa-solid fa-pen"></i>
+                </a>
+                <a class="pedidos-btn pedidos-btn--icon pedidos-btn--delete" routerLink="/pedidos/form/delete/{{ pedido.id }}">
+                  <i class="fa fa-solid fa-eraser"></i>
+                </a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
 </div>
