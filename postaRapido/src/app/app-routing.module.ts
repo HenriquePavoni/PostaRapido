@@ -6,8 +6,8 @@ import {LayoutComponent} from "./layout/layout.component";
 
 
 const routes: Routes = [
-  {path : 'login', component: LoginComponent},
-
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: '',
     component: LayoutComponent,
@@ -20,11 +20,9 @@ const routes: Routes = [
       {
         path : 'pedidos',
         loadChildren: () => import('./pedidos/pedidos.module').then(m => m.PedidosModule)
-      },
-      {path: '', redirectTo: 'home', pathMatch: 'full'}
+      }
     ]
   },
-
   { path: '**', redirectTo: 'login' }
 ];
 
