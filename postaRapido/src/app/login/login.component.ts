@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Usuario } from './usuario';
@@ -8,7 +8,7 @@ import { Usuario } from './usuario';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
@@ -24,20 +24,36 @@ export class LoginComponent {
     private service: AuthService
   ) { }
 
+  ngOnInit(): void {
+    if (this.service.estaAutenticado()) {
+      this.router.navigate(['/home']);
+    }
+  }
+
   onSubmit() {
     if (!this.username?.trim() || !this.password?.trim()) {
       this.mensagemErro = 'Informe usuário e senha.';
       return;
     }
 
+    const usuario = new Usuario();
+    usuario.username = this.username.trim();
+    usuario.password = this.password;
+
     this.loading = true;
     this.limparMensagens();
 
-    // TODO: integrar com POST /api/auth/login quando o AuthService estiver pronto
-    setTimeout(() => {
-      this.loading = false;
-      this.router.navigate(['/home']);
-    }, 400);
+    this.service.login(usuario).subscribe({
+      next: (res) => {
+        this.service.salvarToken(res.token, usuario.username);
+        this.loading = false;
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        this.loading = false;
+        this.mensagemErro = this.extrairMensagemErro(err);
+      }
+    });
   }
 
   preparaCadastrar(event: Event) {

@@ -91,8 +91,8 @@ export class MaskDirective implements ControlValueAccessor, OnChanges {
 
     switch (this.maskType) {
       case 'cpf':
-        model = unmaskCpf(raw);
-        display = maskCpf(String(model));
+        display = maskCpf(raw);
+        model = display;
         break;
       case 'phone':
         display = maskPhone(raw);

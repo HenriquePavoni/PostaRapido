@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../../auth.service';
 
 const SIDEBAR_STORAGE_KEY = 'sb|sidebar-toggle';
 
@@ -9,7 +11,15 @@ const SIDEBAR_STORAGE_KEY = 'sb|sidebar-toggle';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private router: Router
+  ) { }
+
+  sair(): void {
+    this.auth.logout();
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit(): void {
     if (localStorage.getItem(SIDEBAR_STORAGE_KEY) === 'true') {

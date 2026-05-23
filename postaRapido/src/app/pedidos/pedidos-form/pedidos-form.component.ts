@@ -49,10 +49,12 @@ export class PedidosFormComponent implements OnInit {
     });
   }
 
-
   onSubmit() {
-    this.pedido.cliente = this.listaClientes.find(c => c.id == this.pedido.cliente.id);
-    if (this.status == 'update') {
+    if (this.pedido.cliente) {
+      this.pedido.cliente = this.listaClientes.find(c => c.id == this.pedido.cliente.id);
+    }
+
+    if (this.status === 'update') {
       this.pedidoSerivce
         .updatePedido(this.pedido)
         .subscribe(response => {
@@ -64,17 +66,16 @@ export class PedidosFormComponent implements OnInit {
             this.success = false;
           }, 3000);
         }, errorResponse => {
-          this.success = false;
           this.errors = errorResponse.error.errors;
 
           setTimeout(() => {
             this.errors = null;
           }, 3000);
-        })
+        });
       return;
     }
 
-    if (this.status == 'delete') {
+    if (this.status === 'delete') {
       this.pedidoSerivce
         .deletePedido(this.pedido)
         .subscribe(response => {
@@ -86,17 +87,16 @@ export class PedidosFormComponent implements OnInit {
             this.success = false;
           }, 3000);
         }, errorResponse => {
-          this.success = false;
           this.errors = errorResponse.error.errors;
 
           setTimeout(() => {
-            this.success = false;
+            this.errors = null;
           }, 3000);
-        })
+        });
       return;
     }
 
-    if (this.status == 'create') {
+    if (this.status === 'create') {
       this.pedidoSerivce
         .save(this.pedido)
         .subscribe(response => {
@@ -108,6 +108,7 @@ export class PedidosFormComponent implements OnInit {
           setTimeout(() => {
             this.success = false;
           }, 3000);
+
         }, errorResponse => {
           this.success = false;
           this.errors = errorResponse.error.errors;
@@ -120,13 +121,13 @@ export class PedidosFormComponent implements OnInit {
   }
 
   voltarLista() {
-    this.router.navigate(['pedidos/list'])
+    this.router.navigate(['pedidos/pedidos-list']);
   }
 
   enviaMensagens() {
 
     if (this.errors != null) {
-      this.router.navigate(['cliente/list'], {
+      this.router.navigate(['pedidos/pedidos-list'], {
         state: { mensagens: this.errors }
       });
     }
@@ -136,7 +137,7 @@ export class PedidosFormComponent implements OnInit {
     if (this.status === 'update') msg = 'Pedido atualizado com sucesso.';
     if (this.status === 'delete') msg = 'Pedido excluído com sucesso.';
 
-    this.router.navigate(['pedidos/list'], {
+    this.router.navigate(['pedidos/pedidos-list'], {
       state: { mensagens: [msg] }
     });
   }

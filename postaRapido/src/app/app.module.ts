@@ -7,7 +7,8 @@ import { TemplateModule } from './template/template.module';
 import { HomeComponent } from './home/home.component';
 import { ClientesModule } from './clientes/clientes.module';
 import { ClientesService } from './clientes.service';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
 import { DatePipe, registerLocaleData } from '@angular/common';
 import { PedidoService } from './pedido.service';
 import { PedidosModule } from './pedidos/pedidos.module';
@@ -40,7 +41,8 @@ registerLocaleData(localePt);
     PedidoService,
     AuthService,
     DatePipe,
-    { provide: LOCALE_ID, useValue: 'pt-BR' }
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

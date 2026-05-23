@@ -7,5 +7,12 @@
       aria-label="Abrir ou fechar menu lateral"
       (click)="toggleSidebar($event)">
         <i id="item-icon" class="fas fa-bars fs-3"></i>
-    </button>            
+    </button>
+    <button
+      type="button"
+      class="btn btn-link btn-sm ms-auto navbar-logout"
+      aria-label="Sair"
+      (click)="sair()">
+      <i class="fas fa-sign-out-alt"></i> Sair
+    </button>
 </nav>

@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'pedidos-list', component: PedidosListComponent },
   { path: 'pedidos-form/:status/:id', component: PedidosFormComponent },
   { path: 'pedidos-form/:status', component: PedidosFormComponent },
-  { path: 'pedidos-form', component: PedidosFormComponent}
 ];
 
 @NgModule({
