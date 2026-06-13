@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### MCP database server ###
+mcp-db/node_modules/
+
+### Environment variables (secrets) ###
+.env
